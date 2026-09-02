@@ -18,6 +18,7 @@ class Preferences(QDialog, Ui_Preferences):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        self.retranslateUi(self)
 
         self.settings = QSettings(self)
         self.root_path = ""
@@ -51,7 +52,7 @@ class Preferences(QDialog, Ui_Preferences):
             point_size = float(size)
         except ValueError:
             return
-        font.setPointSize(point_size)
+        font.setPointSizeF(point_size)
         font.setFamily(self.fontComboBox.currentFont().family())
         self.fontComboBox.setFont(font)
 
