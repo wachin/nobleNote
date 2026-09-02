@@ -135,11 +135,18 @@ class FindFileSystemModel(QSortFilterProxyModel):
         if ffm is not None:
             ffm.findInFiles(fileName, content, path, waitCursor)
 
-    def index(self, path: str, column: int = 0) -> QModelIndex:
-        fsm = self._fsm()
-        if fsm is not None:
-            return self.mapFromSource(fsm.index(path, column))
-        return QModelIndex()
+    def index(self, a, b=None, c=None):
+        # If the first argument is a string, treat it as a path-based index
+        if isinstance(a, str):
+            path = a
+            column = b if isinstance(b, int) else 0
+            fsm = self._fsm()
+            if fsm is not None:
+                return self.mapFromSource(fsm.index(path, column))
+            return QModelIndex()
+        else:
+            # Otherwise, treat it as the standard index (row, column, parent)
+            return super().index(a, b, c)
 
     def copyNotesToBackupDir(self, indexes):
         """Read the uuid from each note and copy the note to the backup dir

@@ -35,9 +35,9 @@ def main() -> int:
 
     # portable version: store the settings next to the executable
     app_dir = QDir.toNativeSeparators(app.applicationDirPath())
-    settings_file = QFileInfo(
-        QDir(app_dir + "/" + app.applicationName() + "/"
-             + QFileInfo(QSettings().fileName()).fileName()))
+    settings_file_path = app_dir + "/" + app.applicationName() + "/" + \
+                         QFileInfo(QSettings().fileName()).fileName()
+    settings_file = QFileInfo(settings_file_path)
     if settings_file.exists():
         parent = settings_file.dir()
         parent.cdUp()  # cdUp because the folder is created by QSettings later
