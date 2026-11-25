@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-VERSION_FILE = Path(__file__).resolve().parent.parent / "version.txt"
+VERSION_FILE = Path(__file__).resolve().parent / "version.txt"
 
 
 def version_string() -> str:

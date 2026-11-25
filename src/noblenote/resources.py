@@ -3,15 +3,15 @@
 """Resource helper: loads the svg icons used by nobleNote.
 
 In the C++ version the icons are compiled into the binary via nobleNote.qrc.
-In this Python port we load the very same svg files directly from the
-original source tree.
+In this Python port we ship the very same svg files as package data
+(see the icons/ directory next to this module).
 """
 
 from pathlib import Path
 
 from PyQt6.QtGui import QIcon
 
-ICON_DIR = Path(__file__).resolve().parent.parent / "src" / "noblenote-icons"
+ICON_DIR = Path(__file__).resolve().parent / "icons"
 
 # aliases as defined in nobleNote.qrc
 _ALIASES = {
