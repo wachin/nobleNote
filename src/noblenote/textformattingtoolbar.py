@@ -9,7 +9,7 @@ from PyQt6.QtGui import (QAction, QBrush, QColor, QFont, QFontDatabase,
 from PyQt6.QtWidgets import (QColorDialog, QComboBox, QFontComboBox,
                              QInputDialog, QLineEdit, QToolBar, QTextEdit)
 
-from .resources import icon
+from .resources import icon, palette_watcher
 
 
 class TextFormattingToolbar(QToolBar):
@@ -108,6 +108,42 @@ class TextFormattingToolbar(QToolBar):
 
         self.text_edit_.currentCharFormatChanged.connect(self.get_font_and_point_size_of_text)
         self.text_edit_.cursorPositionChanged.connect(self.update_bullet_point_toolbar_button)
+
+        watcher = palette_watcher()
+        if watcher is not None:
+            watcher.paletteChanged.connect(self.refresh_icons)
+
+    # ------------------------------------------------------------------
+    @staticmethod
+    def _swatch(color) -> QIcon:
+        """A button icon filled with the given color."""
+        pix = QPixmap(16, 16)
+        pix.fill(color)
+        return QIcon(pix)
+
+    def refresh_icons(self):
+        """Re-create the icons after the application palette changed."""
+        self.action_text_bold.setIcon(icon("bold"))
+        self.action_text_italic.setIcon(icon("italic"))
+        self.action_text_underline.setIcon(icon("underlined"))
+        self.action_text_strike_out.setIcon(icon("strikedout"))
+        self.action_insert_hyperlink.setIcon(icon("hyperlink"))
+        self.action_clear_formatting.setIcon(icon("clearFormatting"))
+        self.action_bullet_point.setIcon(icon("bulletpoints"))
+
+        palette = self.text_edit_.palette()
+        char_format = self.text_edit_.currentCharFormat()
+        foreground = char_format.foreground()
+        if foreground.style() == Qt.BrushStyle.NoBrush:
+            self.action_text_color.setIcon(
+                self._swatch(palette.windowText().color()))
+        else:
+            self.action_text_color.setIcon(self._swatch(foreground.color()))
+        background = char_format.background()
+        if background.style() == Qt.BrushStyle.NoBrush:
+            self.action_text_bcolor.setIcon(self._swatch(palette.base().color()))
+        else:
+            self.action_text_bcolor.setIcon(self._swatch(background.color()))
 
     # ------------------------------------------------------------------
     def merge_format_on_word_or_selection(self, fmt: QTextCharFormat):

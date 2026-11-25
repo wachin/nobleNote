@@ -27,7 +27,7 @@ from .lineedit import LineEdit
 from .note import Note
 from .noteimporter import NoteImporter
 from .preferences import Preferences
-from .resources import icon
+from .resources import icon, palette_watcher
 from .systemtraycreator import SystemTrayCreator
 from .textsearchtoolbar import TextSearchToolbar
 from .ui.ui_mainwindow import Ui_MainWindow
@@ -171,6 +171,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._connect_signals()
 
         self.write_backup_dir_path()
+
+        watcher = palette_watcher()
+        if watcher is not None:
+            watcher.paletteChanged.connect(self.refresh_icons)
+
+    # ------------------------------------------------------------------
+    def refresh_icons(self):
+        """Re-create the icons after the application palette changed."""
+        self.setWindowIcon(icon("nobleNote"))
+        self.actionConfigure.setIcon(icon("preferences"))
+        self.actionTrash.setIcon(icon("trash"))
+        self.actionNew_folder.setIcon(icon("newFolder"))
+        self.actionRename_folder.setIcon(icon("renameFolder"))
+        self.actionDelete_folder.setIcon(icon("deleteFolder"))
+        self.actionNew_note.setIcon(icon("newNote"))
+        self.actionRename_note.setIcon(icon("renameNote"))
+        self.actionDelete_note.setIcon(icon("deleteNote"))
+        if self.t_icon is not None:
+            self.t_icon.setIcon(icon("nobleNote"))
+
+        # the views ask the icon providers for their icons, refresh them so
+        # they pick up the new color
+        self.folder_fs_model.setIconProvider(self.folder_icon_provider)
+        self.note_fs_model.setIconProvider(self.note_icon_provider)
+        self.folder_view.viewport().update()
+        self.note_view.viewport().update()
 # ------------------------------------------------------------------
     def _connect_signals(self):
         self.folder_view.activated.connect(self.folder_activated_index)

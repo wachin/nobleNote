@@ -16,7 +16,7 @@ returned untouched, and nothing changes on light color schemes.
 import re
 from pathlib import Path
 
-from PyQt6.QtCore import QRectF, Qt
+from PyQt6.QtCore import QEvent, QObject, QRectF, Qt, QTimer, pyqtSignal
 from PyQt6.QtGui import QColor, QIcon, QImage, QPainter, QPalette, QPixmap
 from PyQt6.QtWidgets import QApplication
 
@@ -136,6 +136,64 @@ def _adapt_to_palette(path: Path, qicon: QIcon) -> QIcon:
 
     _icon_cache[key] = adapted
     return adapted
+
+
+def clear_icon_cache():
+    """Drop the recolored icons (the color scheme changed)."""
+    _icon_cache.clear()
+
+
+class _PaletteWatcher(QObject):
+    """Emits paletteChanged after the application color scheme changed.
+
+    PyQt6/Qt6 has no QApplication.paletteChanged signal, so the change is
+    taken from the application palette change events, which is what a theme
+    switch (qt6ct, the desktop color scheme, ...) delivers to the widgets.
+    """
+
+    paletteChanged = pyqtSignal()
+
+    def __init__(self):
+        super().__init__()
+        self._text_color = _text_color().name()
+        self._pending = False
+
+    def eventFilter(self, obj, event) -> bool:
+        if event.type() in (QEvent.Type.ApplicationPaletteChange,
+                            QEvent.Type.PaletteChange):
+            # a theme switch sends many events, look at the palette once
+            if not self._pending:
+                self._pending = True
+                QTimer.singleShot(0, self._check)
+        return False
+
+    def _check(self):
+        self._pending = False
+        color = _text_color().name()
+        if not _text_color().isValid() or color == self._text_color:
+            return
+        self._text_color = color
+        clear_icon_cache()
+        self.paletteChanged.emit()
+
+
+_watcher = None
+
+
+def palette_watcher():
+    """The object whose paletteChanged signal fires on a color scheme change.
+
+    Install the application event filter on first use.  Returns None when
+    there is no QApplication yet (icons then cannot be recolored anyway).
+    """
+    global _watcher
+    app = QApplication.instance()
+    if app is None:
+        return None
+    if _watcher is None:
+        _watcher = _PaletteWatcher()
+        app.installEventFilter(_watcher)
+    return _watcher
 
 
 def icon(name: str) -> QIcon:
