@@ -29,6 +29,12 @@ class Trash(QDialog, Ui_Trash):
         self.deleteButton.clicked.connect(self.delete_backup)
         self.restoreButton.clicked.connect(self.restore_backup)
 
+    def _remove_item(self, item):
+        """Remove a trashed note from the list (the C++ code deleted it)."""
+        index = self.treeWidget.indexOfTopLevelItem(item)
+        if index != -1:
+            self.treeWidget.takeTopLevelItem(index)
+
     def restore_backup(self):
         if not self.treeWidget.selectedItems():
             return
@@ -53,8 +59,8 @@ class Trash(QDialog, Ui_Trash):
                 import shutil
                 shutil.copyfile(backup_file, file_path)
             except OSError:
-                pass
-            del item  # remove from the tree
+                continue  # keep the entry, the note was not restored
+            self._remove_item(item)
 
     def delete_backup(self):
         if not self.treeWidget.selectedItems():
@@ -85,7 +91,7 @@ class Trash(QDialog, Ui_Trash):
             QSettings().remove("Notes/" + uuid_str + "_window_position")
 
         for item in item_list:
-            del item
+            self._remove_item(item)
 
     def show_preview(self):
         if self.treeWidget.currentItem() is None:  # prevents program crash
@@ -93,7 +99,7 @@ class Trash(QDialog, Ui_Trash):
             return
 
         if not self.treeWidget.currentItem().isSelected():
-            if self.treeWidget.selectedItems().count() != 1:
+            if len(self.treeWidget.selectedItems()) != 1:
                 self.textEdit.clear()
             else:
                 data = list(self.treeWidget.selectedItems()[0].data(
