@@ -24,26 +24,26 @@
     <message>
       <location filename="../filesystemmodel.py" line="65" />
       <source>Files could not be dropped</source>
-      <translation>Les fichiers ne peuvent Ãªtre jetÃ©s</translation>
+      <translation>Les fichiers ne peuvent être jetés</translation>
     </message>
     <message>
       <location filename="../filesystemmodel.py" line="66" />
       <source>The files could not be dropped because files of the same names are already existing in this notebook:
 
 %1</source>
-      <translation>Les fichiers ne peuvent Ãªtre supprimÃ©s car des fichiers de mÃªme noms existent encore: %1</translation>
+      <translation>Les fichiers ne peuvent être supprimés car des fichiers de même noms existent encore: %1</translation>
     </message>
     <message>
       <location filename="../filesystemmodel.py" line="72" />
       <source>File could not be dropped</source>
-      <translation>Le fichier ne peut Ãªtre jetÃ©</translation>
+      <translation>Le fichier ne peut être jeté</translation>
     </message>
     <message>
       <location filename="../filesystemmodel.py" line="73" />
       <source>The file could not be dropped because a file with the same name already exists in this notebook:
 
 %1</source>
-      <translation>Un fichier ne peut Ãªtre supprimÃ© car un fichier de mÃªme noms existe encore: %1</translation>
+      <translation>Un fichier ne peut être supprimé car un fichier de même noms existe encore: %1</translation>
     </message>
   </context>
   <context>
@@ -51,7 +51,7 @@
     <message>
       <location filename="../htmlnotewriter.py" line="126" />
       <source>default</source>
-      <translation>dÃ©faut</translation>
+      <translation>défaut</translation>
     </message>
     <message>
       <location filename="../htmlnotewriter.py" line="131" />
@@ -81,17 +81,17 @@
     <message>
       <location filename="../mainwindow.py" line="296" />
       <source>default</source>
-      <translation>dÃ©faut</translation>
+      <translation>défaut</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="438" />
       <source>Note does not exist</source>
-      <translation>La note n'Ã©xiste pas</translation>
+      <translation>La note n'éxiste pas</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="439" />
       <source>The selected note cannot be opened because it has been moved or renamed!</source>
-      <translation>La note sÃ©lÃ©ctionnÃ©e ne peut Ãªtre ouvertes car elle a Ã©tÃ© dÃ©placÃ©e ou renomÃ©e.</translation>
+      <translation>La note séléctionnée ne peut être ouvertes car elle a été déplacée ou renomée.</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="470" />
@@ -117,12 +117,12 @@
       <location filename="../mainwindow.py" line="559" />
       <location filename="../mainwindow.py" line="527" />
       <source>Notebook could not be deleted</source>
-      <translation>Le carnet de note ne peut Ãªtre effacÃ©</translation>
+      <translation>Le carnet de note ne peut être effacé</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="528" />
       <source>The notebook could not be deleted because one notebook must remain</source>
-      <translation>Le carnet de note ne peut Ãªtre effacÃ© car il doit rester un carnet d'adresse</translation>
+      <translation>Le carnet de note ne peut être effacé car il doit rester un carnet d'adresse</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="537" />
@@ -132,12 +132,12 @@
     <message>
       <location filename="../mainwindow.py" line="538" />
       <source>Are you sure you want to delete the notebook "%1" and move all containing notes to the trash?</source>
-      <translation>Etes vous sures de vouloir effacre le carnet de note et jeter toutes les notes qu'il contient Ã  la corbeille?</translation>
+      <translation>Etes vous sures de vouloir effacre le carnet de note et jeter toutes les notes qu'il contient à la corbeille?</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="560" />
       <source>The notebook could not be deleted because one or more notes inside the notebook could not be deleted.</source>
-      <translation>Le carnet de note ne peut Ãªtre effacÃ© car une ou plusieurs notes sont ouvertes</translation>
+      <translation>Le carnet de note ne peut être effacé car une ou plusieurs notes sont ouvertes</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="607" />
@@ -159,7 +159,7 @@
       <source>Notes of the same names already exist in this notebook:
 
 %1</source>
-      <translation>Des notes de mÃªme noms existent dÃ©jÃ  dans le carnet d'adresse:
+      <translation>Des notes de même noms existent déjà dans le carnet d'adresse:
 
 %1</translation>
     </message>
@@ -181,7 +181,7 @@
     <message>
       <location filename="../mainwindow.py" line="724" />
       <source>Are you sure you want to permanently delete the selected notes?</source>
-      <translation type="unfinished">Etes vous sures de vouloir supprimer les notes sÃ©lÃ©ctionnÃ©es</translation>
+      <translation type="unfinished">Etes vous sures de vouloir supprimer les notes séléctionnées</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="727" />
@@ -193,7 +193,7 @@
       <source>Are you sure you want to move these %1 notes to the trash?
 
 %2</source>
-      <translation>Etes vous sures de vouloir dÃ©placer ces %1 notes dans la corbeille?
+      <translation>Etes vous sures de vouloir déplacer ces %1 notes dans la corbeille?
 
 %2</translation>
     </message>
@@ -205,7 +205,7 @@
     <message>
       <location filename="../mainwindow.py" line="733" />
       <source>Are you sure you want to move the note %1 to the trash?</source>
-      <translation>Etes vous surs de vouloir dÃ©placer la note %1 Ã  la corbeille?</translation>
+      <translation>Etes vous surs de vouloir déplacer la note %1 à la corbeille?</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="878" />
@@ -225,7 +225,7 @@
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
       <source>Open recent</source>
-      <translation>Ouvrir rÃ©cent</translation>
+      <translation>Ouvrir récent</translation>
     </message>
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
@@ -285,7 +285,7 @@
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
       <source>&amp;Trash</source>
-      <translation>DÃ©placer dans la corbeille</translation>
+      <translation>Déplacer dans la corbeille</translation>
     </message>
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
@@ -411,12 +411,12 @@
     <message>
       <location filename="../notedescriptor.py" line="95" />
       <source>Note modified</source>
-      <translation>Note modifiÃ©e</translation>
+      <translation>Note modifiée</translation>
     </message>
     <message>
       <location filename="../notedescriptor.py" line="96" />
       <source>This note has been modified by another instance of %1. Should the note be saved under a different name? Else the note will be reloaded.</source>
-      <translation>La note a Ã©tÃ© modifiÃ©e par une autre instance de %1. Doit on sauvegarder la note sous un autre nom? Sinon la note sera rechargÃ©e.</translation>
+      <translation>La note a été modifiée par une autre instance de %1. Doit on sauvegarder la note sous un autre nom? Sinon la note sera rechargée.</translation>
     </message>
     <message>
       <location filename="../notedescriptor.py" line="123" />
@@ -467,7 +467,7 @@
     <message>
       <location filename="../preferences.py" line="85" />
       <source>Do you want to keep the old trash folder associated with the path %1? (You will be able to see the old files in the trash again if you change back to the previous directory.)</source>
-      <translation>Souhaitez vous garder l'ancien dossier corbeille associÃ©e au chemin %1?</translation>
+      <translation>Souhaitez vous garder l'ancien dossier corbeille associée au chemin %1?</translation>
     </message>
     <message>
       <location filename="../preferences.py" line="103" />
@@ -487,7 +487,7 @@
     <message>
       <location filename="../preferences.py" line="135" />
       <source>No Write Access</source>
-      <translation>Pas d'accÃ¨s en Ã©criture</translation>
+      <translation>Pas d'accès en écriture</translation>
     </message>
     <message>
       <location filename="../preferences.py" line="136" />
@@ -497,22 +497,22 @@
     <message>
       <location filename="../preferences.py" line="147" />
       <source>(Will be updated after pressing OK.)</source>
-      <translation>(Sera mis Ã  jour aprÃ¨s prÃ©ssion sur OK.)</translation>
+      <translation>(Sera mis à jour après préssion sur OK.)</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Preferences</source>
-      <translation>PrÃ©fÃ¨rences</translation>
+      <translation>Préfèrences</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>&amp;Touch screen scrolling</source>
-      <translation>DÃ©filement par ecran tactile</translation>
+      <translation>Défilement par ecran tactile</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Note editor default font:</source>
-      <translation>Police par dÃ©faut de l'Ã©diteur de note</translation>
+      <translation>Police par défaut de l'éditeur de note</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
@@ -563,7 +563,7 @@
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Note editor default size:</source>
-      <translation>Taille par dÃ©faut de l'Ã©diteur de note</translation>
+      <translation>Taille par défaut de l'éditeur de note</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
@@ -573,7 +573,7 @@
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Number of recently opened notes</source>
-      <translation>Nombre de notes rÃ©cemment ouvertes</translation>
+      <translation>Nombre de notes récemment ouvertes</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
@@ -601,12 +601,12 @@
     <message>
       <location filename="../textformattingtoolbar.py" line="43" />
       <source>&amp;Underline</source>
-      <translation>&amp;SoulignÃ©</translation>
+      <translation>&amp;Souligné</translation>
     </message>
     <message>
       <location filename="../textformattingtoolbar.py" line="53" />
       <source>&amp;Strike Out</source>
-      <translation>&amp;BarrÃ©</translation>
+      <translation>&amp;Barré</translation>
     </message>
     <message>
       <location filename="../textformattingtoolbar.py" line="63" />
@@ -621,7 +621,7 @@
     <message>
       <location filename="../textformattingtoolbar.py" line="75" />
       <source>Bullet point</source>
-      <translation>Liste Ã  puce</translation>
+      <translation>Liste à puce</translation>
     </message>
     <message>
       <location filename="../textformattingtoolbar.py" line="84" />
@@ -631,12 +631,12 @@
     <message>
       <location filename="../textformattingtoolbar.py" line="91" />
       <source>&amp;Background color...</source>
-      <translation>Couleur d'arriÃ¨re plan...</translation>
+      <translation>Couleur d'arrière plan...</translation>
     </message>
     <message>
       <location filename="../textformattingtoolbar.py" line="195" />
       <source>Insert hyperlink</source>
-      <translation>InsÃ©rer lien hypertexte</translation>
+      <translation>Insérer lien hypertexte</translation>
     </message>
     <message>
       <location filename="../textformattingtoolbar.py" line="196" />
@@ -659,7 +659,7 @@
     <message>
       <location filename="../textsearchtoolbar.py" line="39" />
       <source>Find &amp;previous</source>
-      <translation>PrÃ©cÃ©dent</translation>
+      <translation>Précédent</translation>
     </message>
     <message>
       <location filename="../textsearchtoolbar.py" line="43" />
@@ -669,7 +669,7 @@
     <message>
       <location filename="../textsearchtoolbar.py" line="47" />
       <source>&amp;Case sensitive</source>
-      <translation>Sensible Ã  la casse</translation>
+      <translation>Sensible à la casse</translation>
     </message>
   </context>
   <context>
@@ -682,7 +682,7 @@
     <message>
       <location filename="../trash.py" line="72" />
       <source>Are you sure you want to permanently delete the selected notes?</source>
-      <translation>Etes vous sures de vouloir supprimer les notes sÃ©lÃ©ctionnÃ©es</translation>
+      <translation>Etes vous sures de vouloir supprimer les notes séléctionnées</translation>
     </message>
     <message>
       <location filename="../ui/trash.ui" line="0" />
@@ -707,12 +707,12 @@
     <message>
       <location filename="../ui/trash.ui" line="0" />
       <source>Preview</source>
-      <translation>PrÃ©visualisation</translation>
+      <translation>Prévisualisation</translation>
     </message>
     <message>
       <location filename="../ui/trash.ui" line="0" />
       <source>Deleted notes</source>
-      <translation>Notes effacÃ©es</translation>
+      <translation>Notes effacées</translation>
     </message>
   </context>
   <context>
@@ -737,9 +737,9 @@ The set path for the notes does not exist.
 Maybe it has been moved or renamed.
 You can choose a new directory where the notes are or where they will be saved in.</source>
       <translation>Bienvenu sur nobleNote!
-Le chemin renseignÃ© pour les notes n'existe pas.
-Peut Ãªtre a t il Ã©tait supprimÃ© ou renommÃ©.
-Vous pouvez choisir un nouveau rÃ©pertoire oÃ¹ stocker les notes.</translation>
+Le chemin renseigné pour les notes n'existe pas.
+Peut être a t il était supprimé ou renommé.
+Vous pouvez choisir un nouveau répertoire où stocker les notes.</translation>
     </message>
     <message>
       <location filename="../welcome.py" line="70" />
@@ -747,7 +747,7 @@ Vous pouvez choisir un nouveau rÃ©pertoire oÃ¹ stocker les notes.</translati
 The path where the notes are located is not writable.
 Maybe your drive is running in read only mode.</source>
       <translation>Bienvenu sur nobleNote!
-Le chemin oÃ¹ spont sauvegardÃ©es les notes n'est pas inscriptible.
+Le chemin où spont sauvegardées les notes n'est pas inscriptible.
 peut etre votre disque est en lecture seule.</translation>
     </message>
     <message>
@@ -756,8 +756,8 @@ peut etre votre disque est en lecture seule.</translation>
 This is the first time that nobleNote has been started.
 You can choose a directory where the notes will be saved in.</source>
       <translation>Bienvenu sur nobleNote!
-C'est la premiÃ¨re fois que vous dÃ©marrez nobleNote.
-Vous pouvez choisir un dossier oÃ¹ stocker vos notes.</translation>
+C'est la première fois que vous démarrez nobleNote.
+Vous pouvez choisir un dossier où stocker vos notes.</translation>
     </message>
     <message>
       <location filename="../welcome.py" line="87" />
@@ -765,8 +765,8 @@ Vous pouvez choisir un dossier oÃ¹ stocker vos notes.</translation>
 The path where the notes are located is not writable.
 You can choose a new directory where the notes will be saved in. Otherwise changes might not be saved.</source>
       <translation>Bienvenu sur nobleNote!
-Le chemin oÃ¹ spont sauvegardÃ©es les notes n'est pas inscriptible.
-Vous pouvez choisir un nouveau rÃ©pertoire oÃ¹ stocker les notes.</translation>
+Le chemin où spont sauvegardées les notes n'est pas inscriptible.
+Vous pouvez choisir un nouveau répertoire où stocker les notes.</translation>
     </message>
     <message>
       <location filename="../ui/welcome.ui" line="0" />

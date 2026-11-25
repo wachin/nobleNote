@@ -16,7 +16,7 @@
     <message>
       <location filename="../backup.py" line="100" />
       <source>deleted note</source>
-      <translation />
+      <translation>nota eliminada</translation>
     </message>
   </context>
   <context>
@@ -31,7 +31,9 @@
       <source>The files could not be dropped because files of the same names are already existing in this notebook:
 
 %1</source>
-      <translation type="unfinished" />
+      <translation>No se pudieron soltar los archivos porque ya existen archivos con los mismos nombres en esta libreta de notas:
+
+%1</translation>
     </message>
     <message>
       <location filename="../filesystemmodel.py" line="72" />
@@ -43,7 +45,9 @@
       <source>The file could not be dropped because a file with the same name already exists in this notebook:
 
 %1</source>
-      <translation type="unfinished" />
+      <translation>No se pudo soltar el archivo porque ya existe un archivo con el mismo nombre en esta libreta de notas:
+
+%1</translation>
     </message>
   </context>
   <context>
@@ -101,7 +105,7 @@
     <message>
       <location filename="../mainwindow.py" line="475" />
       <source>new notebook (%1)</source>
-      <translation />
+      <translation>Nueva libreta de notas (%1)</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="487" />
@@ -117,17 +121,17 @@
       <location filename="../mainwindow.py" line="559" />
       <location filename="../mainwindow.py" line="527" />
       <source>Notebook could not be deleted</source>
-      <translation />
+      <translation>No se pudo eliminar la libreta de notas</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="528" />
       <source>The notebook could not be deleted because one notebook must remain</source>
-      <translation />
+      <translation>No se pudo eliminar la libreta de notas porque debe quedar al menos una</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="537" />
       <source>Delete Notebook</source>
-      <translation />
+      <translation>Eliminar libreta de notas</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="538" />
@@ -137,7 +141,7 @@
     <message>
       <location filename="../mainwindow.py" line="560" />
       <source>The notebook could not be deleted because one or more notes inside the notebook could not be deleted.</source>
-      <translation />
+      <translation>No se pudo eliminar la libreta de notas porque no se pudieron eliminar una o más notas de su interior.</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="607" />
@@ -159,12 +163,14 @@
       <source>Notes of the same names already exist in this notebook:
 
 %1</source>
-      <translation type="unfinished" />
+      <translation>Ya existen notas con los mismos nombres en esta libreta de notas:
+
+%1</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="696" />
       <source>&lt;h1&gt;{0} version {1}&lt;/h1&gt;&lt;p&gt;&lt;b&gt;{0}&lt;/b&gt; is a note taking application&lt;/p&gt;&lt;p&gt;Copyright © 2020 Christian Metscher&lt;/p&gt;&lt;p&gt;This is the PyQt6 port of nobleNote.&lt;/p&gt;&lt;p&gt;THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.&lt;/p&gt;&lt;p&gt;PyQt6&lt;/p&gt;</source>
-      <translation type="unfinished" />
+      <translation>&lt;h1&gt;{0} versión {1}&lt;/h1&gt;&lt;p&gt;&lt;b&gt;{0}&lt;/b&gt; es una aplicación para tomar notas&lt;/p&gt;&lt;p&gt;Copyright © 2020 Christian Metscher&lt;/p&gt;&lt;p&gt;Este es el port a PyQt6 de nobleNote.&lt;/p&gt;&lt;p&gt;EL SOFTWARE SE PROPORCIONA «TAL CUAL», SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN FIN DETERMINADO Y NO INFRACCIÓN.&lt;/p&gt;&lt;p&gt;PyQt6&lt;/p&gt;</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="706" />
@@ -179,7 +185,7 @@
     <message>
       <location filename="../mainwindow.py" line="724" />
       <source>Are you sure you want to permanently delete the selected notes?</source>
-      <translation />
+      <translation>¿Está seguro de que quiere eliminar permanentemente las notas seleccionadas?</translation>
     </message>
     <message>
       <location filename="../mainwindow.py" line="727" />
@@ -223,7 +229,7 @@
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
       <source>Open recent</source>
-      <translation />
+      <translation>Abrir recientes</translation>
     </message>
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
@@ -303,7 +309,7 @@
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
       <source>&amp;New notebook</source>
-      <translation />
+      <translation>&amp;Nueva libreta de notas</translation>
     </message>
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
@@ -313,17 +319,17 @@
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
       <source>&amp;Rename notebook</source>
-      <translation />
+      <translation>&amp;Renombrar libreta de notas</translation>
     </message>
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
       <source>Ctrl+R</source>
-      <translation />
+      <translation>Ctrl+R</translation>
     </message>
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
       <source>&amp;Delete notebook</source>
-      <translation />
+      <translation>&amp;Eliminar libreta de notas</translation>
     </message>
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
@@ -383,7 +389,7 @@
     <message>
       <location filename="../ui/mainwindow.ui" line="0" />
       <source>a</source>
-      <translation />
+      <translation>a</translation>
     </message>
   </context>
   <context>
@@ -391,12 +397,12 @@
     <message>
       <location filename="../note.py" line="190" />
       <source>Hide Toolbars</source>
-      <translation />
+      <translation>Ocultar barras de herramientas</translation>
     </message>
     <message>
       <location filename="../note.py" line="192" />
       <source>Show Toolbars</source>
-      <translation />
+      <translation>Mostrar barras de herramientas</translation>
     </message>
     <message>
       <location filename="../ui/note.ui" line="0" />
@@ -414,7 +420,7 @@
     <message>
       <location filename="../notedescriptor.py" line="96" />
       <source>This note has been modified by another instance of %1. Should the note be saved under a different name? Else the note will be reloaded.</source>
-      <translation />
+      <translation>Esta nota ha sido modificada por otra instancia de %1. ¿Desea guardarla con otro nombre? De lo contrario se recargará.</translation>
     </message>
     <message>
       <location filename="../notedescriptor.py" line="123" />
@@ -455,7 +461,7 @@
     <message>
       <location filename="../preferences.py" line="80" />
       <source>Could not write settings!</source>
-      <translation />
+      <translation>No se pudo escribir la configuración.</translation>
     </message>
     <message>
       <location filename="../preferences.py" line="84" />
@@ -465,7 +471,7 @@
     <message>
       <location filename="../preferences.py" line="85" />
       <source>Do you want to keep the old trash folder associated with the path %1? (You will be able to see the old files in the trash again if you change back to the previous directory.)</source>
-      <translation />
+      <translation>¿Desea mantener la carpeta de papelera anterior asociada a la ruta %1? (Podrá volver a ver los archivos antiguos en la papelera si vuelve al directorio anterior.)</translation>
     </message>
     <message>
       <location filename="../preferences.py" line="103" />
@@ -475,7 +481,7 @@
     <message>
       <location filename="../preferences.py" line="104" />
       <source>Could not delete the trash folder!</source>
-      <translation type="unfinished" />
+      <translation>¡No se pudo eliminar la carpeta de papelera!</translation>
     </message>
     <message>
       <location filename="../preferences.py" line="130" />
@@ -495,7 +501,7 @@
     <message>
       <location filename="../preferences.py" line="147" />
       <source>(Will be updated after pressing OK.)</source>
-      <translation />
+      <translation>(Se actualizará al pulsar Aceptar.)</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
@@ -505,33 +511,34 @@
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>&amp;Touch screen scrolling</source>
-      <translation />
+      <translation>&amp;Desplazamiento en pantalla táctil</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Note editor default font:</source>
-      <translation />
+      <translation>Fuente predeterminada del editor de notas:</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Notes can be opened from the tray icon when the application is minimized to the system tray&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation />
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Las notas se pueden abrir desde el icono del área de notificación cuando la aplicación está minimizada en ella&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>&amp;Open notes from tray</source>
-      <translation />
+      <translation>&amp;Abrir notas desde el área de notificación</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Do not show the main interface and notes on startup.
 (Minimized to tray icon)</source>
-      <translation />
+      <translation>No mostrar la interfaz principal ni las notas al iniciar.
+(Minimizada al icono del área de notificación)</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>&amp;Hide main window at startup</source>
-      <translation />
+      <translation>&amp;Ocultar la ventana principal al iniciar</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
@@ -551,17 +558,17 @@
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Root directory:</source>
-      <translation />
+      <translation>Directorio raíz:</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Backup directory:</source>
-      <translation />
+      <translation>Directorio de copias de seguridad:</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Note editor default size:</source>
-      <translation />
+      <translation>Tamaño predeterminado del editor de notas:</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
@@ -571,7 +578,7 @@
     <message>
       <location filename="../ui/preferences.ui" line="0" />
       <source>Number of recently opened notes</source>
-      <translation />
+      <translation>Número de notas abiertas recientemente</translation>
     </message>
     <message>
       <location filename="../ui/preferences.ui" line="0" />
@@ -619,7 +626,7 @@
     <message>
       <location filename="../textformattingtoolbar.py" line="75" />
       <source>Bullet point</source>
-      <translation />
+      <translation>Punto de lista</translation>
     </message>
     <message>
       <location filename="../textformattingtoolbar.py" line="84" />
@@ -652,7 +659,7 @@
     <message>
       <location filename="../textsearchtoolbar.py" line="35" />
       <source>Enter search argument</source>
-      <translation />
+      <translation>Escriba el texto que desea buscar</translation>
     </message>
     <message>
       <location filename="../textsearchtoolbar.py" line="39" />
@@ -667,7 +674,7 @@
     <message>
       <location filename="../textsearchtoolbar.py" line="47" />
       <source>&amp;Case sensitive</source>
-      <translation />
+      <translation>&amp;Distinguir mayúsculas y minúsculas</translation>
     </message>
   </context>
   <context>
@@ -680,7 +687,7 @@
     <message>
       <location filename="../trash.py" line="72" />
       <source>Are you sure you want to permanently delete the selected notes?</source>
-      <translation />
+      <translation>¿Está seguro de que quiere eliminar permanentemente las notas seleccionadas?</translation>
     </message>
     <message>
       <location filename="../ui/trash.ui" line="0" />
@@ -726,7 +733,10 @@
 This is the first time that nobleNote has been started.
 This is the portable edition of nobleNote.
 You are encouraged to use the default path, but you can also choose any other directory.</source>
-      <translation />
+      <translation>¡Bienvenido/a a nobleNote!
+Es la primera vez que se inicia nobleNote.
+Esta es la edición portátil de nobleNote.
+Se recomienda usar la ruta predeterminada, pero también puede elegir cualquier otro directorio.</translation>
     </message>
     <message>
       <location filename="../welcome.py" line="64" />
@@ -734,28 +744,37 @@ You are encouraged to use the default path, but you can also choose any other di
 The set path for the notes does not exist.
 Maybe it has been moved or renamed.
 You can choose a new directory where the notes are or where they will be saved in.</source>
-      <translation />
+      <translation>¡Bienvenido/a a nobleNote!
+La ruta configurada para las notas no existe.
+Puede que se haya movido o renombrado.
+Puede elegir un nuevo directorio donde estén las notas o donde se vayan a guardar.</translation>
     </message>
     <message>
       <location filename="../welcome.py" line="70" />
       <source>Welcome to nobleNote!
 The path where the notes are located is not writable.
 Maybe your drive is running in read only mode.</source>
-      <translation />
+      <translation>¡Bienvenido/a a nobleNote!
+La ruta donde están las notas no es escribible.
+Puede que su unidad esté en modo de solo lectura.</translation>
     </message>
     <message>
       <location filename="../welcome.py" line="76" />
       <source>Welcome to nobleNote!
 This is the first time that nobleNote has been started.
 You can choose a directory where the notes will be saved in.</source>
-      <translation />
+      <translation>¡Bienvenido/a a nobleNote!
+Es la primera vez que se inicia nobleNote.
+Puede elegir un directorio donde se guardarán las notas.</translation>
     </message>
     <message>
       <location filename="../welcome.py" line="87" />
       <source>Welcome to nobleNote!
 The path where the notes are located is not writable.
 You can choose a new directory where the notes will be saved in. Otherwise changes might not be saved.</source>
-      <translation />
+      <translation>¡Bienvenido/a a nobleNote!
+La ruta donde están las notas no es escribible.
+Puede elegir un nuevo directorio donde se guarden las notas. De lo contrario, es posible que los cambios no se guarden.</translation>
     </message>
     <message>
       <location filename="../ui/welcome.ui" line="0" />
