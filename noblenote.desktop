@@ -1,10 +1,21 @@
 [Desktop Entry]
+Version=1.0
+Type=Application
 Name=nobleNote
 Name[de_DE]=nobleNote
+GenericName=Note Taking Application
+Comment=Write and organise notes in notebooks
+Comment[es]=Escriba y organice notas en libretas
 Exec=noblenote
-Terminal=false
-Type=Application
 Icon=noblenote
+Terminal=false
 Categories=Utility;
+StartupNotify=true
 Keywords=Note;Notes;Notice;Sticker;Memo;
-Comment=Note taking application
+Keywords[es]=Nota;Notas;Aviso;Recordatorio;
+# Icon=noblenote es el nombre del icono en el tema: se resuelve instalando
+# src/noblenote/icons/noblenote.svg como noblenote.svg dentro de
+# hicolor/scalable/apps (o en /usr/share/pixmaps). Si prefieres no tocar el
+# tema de iconos, usa una ruta absoluta:  Icon=/ruta/a/noblenote.svg
+# Exec=noblenote necesita el comando en el PATH de la sesión gráfica; si lo
+# instalaste en un venv, pon la ruta absoluta a su binario.
