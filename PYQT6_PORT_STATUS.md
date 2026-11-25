@@ -1,84 +1,169 @@
-# nobleNote - PyQt6 Port
+# nobleNote - port a PyQt6
 
-Estado del puerto de C++/Qt5 a Python/PyQt6.
+Estado del port de C++/Qt6 a Python/PyQt6.
 
-## Estado actual: COMPLETADO Y VERIFICADO
+## Estado actual: COMPLETO (a nivel de codigo)
 
-- **34/34 modulos** importan correctamente
-- **Todos los archivos compilan** sin errores (`python3 -m compileall pyqt6`)
-- **Smoke test funcional** pasa 7 pasos criticos (ver abajo)
+- **26/26** archivos `.cpp` tienen equivalente en `src/noblenote/` (32 modulos, todos importan).
+- **164 metodos** del C++: 149 con el mismo nombre en snake_case, 15 renombrados o codigo muerto (ver abajo).
+- **5/5** formularios `.ui` portados a `src/noblenote/ui/ui_*.py`.
+- **Traducciones funcionando**: 11 idiomas, `.qm` versionados y traductor cargado al arrancar.
+- **Iconos reales** (20 SVG + `.ico`), **arrastrar y soltar** con `MoveAction`, **19 claves de `QSettings`** identicas al C++.
 
-## Ejecutar
+Pendiente: validar en una sesion grafica real y borrar el codigo C++ (ver "Pendiente").
+El ultimo commit con el C++ presente esta marcado con el tag **`v1.5.0-cpp`**.
+
+## Como ejecutar
 
 ```bash
-# Entorno grafico normal
-python3 -m pyqt6
+# Desde la raiz del repo, sin instalar nada
+PYTHONPATH=src python3 -m noblenote
 
-# Headless (tests)
-QT_QPA_PLATFORM=offscreen python3 -m pyqt6
+# Instalado en un entorno virtual (deja el comando `noblenote` en el PATH)
+python3 -m venv .venv && .venv/bin/pip install -e .
+.venv/bin/noblenote
+
+# Sin entorno grafico (pruebas)
+QT_QPA_PLATFORM=offscreen PYTHONPATH=src python3 -m noblenote
 ```
 
-## Estructura del puerto
+Layout `src`, asi que `PYTHONPATH=src` (o la instalacion) es obligatorio: el paquete **no** esta en la raiz.
+
+## Estructura del port
 
 ```
-pyqt6/
-├── __init__.py              # Package marker
-├── __main__.py              # Entry point (python3 -m pyqt6)
-├── main.py                  # QApplication bootstrap
-├── mainwindow.py            # Ventana principal
-├── note.py                  # Widget de nota individual
-├── notedescriptor.py        # Abstraccion de archivo de nota
-├── textdocument.py          # QTextDocument con delayed modification
-├── textbrowser.py           # QTextBrowser con senales custom
-├── textformattingtoolbar.py # Toolbar de formato
-├── textsearchtoolbar.py     # Toolbar de busqueda
-├── htmlnotereader.py        # Lector de notas HTML
-├── htmlnotewriter.py        # Escritor de notas HTML
-├── xmlnotereader.py         # Lector de notas XML (tomboy/gnote)
-├── xmlnotewriter.py         # Escritor de notas XML
-├── highlighter.py           # Resaltado de sintaxis
-├── filesystemmodel.py       # QFileSystemModel override
-├── findfilemodel.py         # Modelo para busqueda en archivos
-├── findfilesystemmodel.py   # Proxy model unificado
-├── fileiconprovider.py      # Proveedor de iconos
-├── lineedit.py              # QLineEdit con placeholder
-├── progressreceiver.py      # Receiver de progreso
-├── preferences.py           # Dialogo de preferencias
-├── welcome.py               # Pantalla de bienvenida
-├── trash.py                 # Papelera
-├── backup.py                # Sistema de respaldo
-├── noteimporter.py          # Importador de notas
-├── systemtraycreator.py     # Icono en system tray
-├── datetimeutil.py          # Utilidades de fecha/UUID
-├── xorcipher.py             # Cifrado XOR
-├── resources.py             # Manejo de recursos/iconos
-├── version.py               # Version de la app
-├── abstractnotereader.py    # Clase base abstracta
-└── ui/                      # Widgets generados de .ui files
-    ├── ui_mainwindow.py
-    ├── ui_note.py
-    ├── ui_welcome.py
-    ├── ui_trash.py
-    └── ui_preferences.py
+src/noblenote/                 # 32 modulos
+├── __init__.py                # marca de paquete
+├── __main__.py                # python3 -m noblenote
+├── main.py                    # QApplication, QSettings portables, traductores
+├── mainwindow.py              # ventana principal
+├── note.py                    # ventana de una nota
+├── notedescriptor.py          # capa sobre el archivo de nota (guardado/carga)
+├── textdocument.py            # QTextDocument con modificacion diferida
+├── textbrowser.py             # QTextBrowser con señales propias
+├── textformattingtoolbar.py   # barra de formato
+├── textsearchtoolbar.py       # barra de busqueda
+├── htmlnotereader.py          # lector de notas HTML
+├── htmlnotewriter.py          # escritor de notas HTML (+ write_xml_2_html)
+├── xmlnotereader.py           # lector de notas XML (tomboy/gnote)
+├── xmlnotewriter.py           # escritor de notas XML
+├── highlighter.py             # resaltado de la busqueda
+├── filesystemmodel.py         # QFileSystemModel con flags() y drop corregidos
+├── findfilemodel.py           # modelo de resultados de busqueda
+├── findfilesystemmodel.py     # proxy unificado
+├── fileiconprovider.py        # iconos de archivo (incluye estado "cortado")
+├── lineedit.py                # QLineEdit con boton de limpiar
+├── progressreceiver.py        # progreso desde hilos (via señales)
+├── preferences.py             # dialogo de preferencias
+├── welcome.py                 # dialogo de bienvenida
+├── trash.py                   # papelera
+├── backup.py                  # indexado de la papelera
+├── noteimporter.py            # importador de notas tomboy/gnote
+├── systemtraycreator.py       # menu "abrir notas desde la bandeja"
+├── datetimeutil.py            # fechas y UUID
+├── xorcipher.py               # cifrado XOR (sin uso, igual que en el C++)
+├── abstractnotereader.py      # clase base
+├── resources.py               # iconos SVG + alias de nobleNote.qrc
+├── version.py                 # version.txt
+├── version.txt                # 1.5.0
+├── requirements.txt           # dependencias (tambien en pyproject.toml)
+├── icons/                     # 20 SVG + noblenote.ico
+├── translations/              # 11 .ts + 11 .qm
+└── ui/                        # ui_*.py + los 5 .ui de origen
 ```
+
+En la raiz: `pyproject.toml` (src-layout, `noblenote` como entry point), `noblenote.desktop`,
+`README.md`, `NEWS`, `COPYING`, `screenshot/` y, de momento, el C++ original (`src/*.cpp|h`,
+`nobleNote.pro`, `nobleNote.qrc`, `icon.rc`).
+
+## Metodos del C++ renombrados o sin equivalente
+
+Ninguno es una funcionalidad perdida:
+
+| C++ | Situacion en el port |
+|-----|----------------------|
+| `MainWindow::updateMyTrayIcon` | cuerpo = `trayMenu` dentro de un bloque `#ifdef` comentado; nadie lo llama |
+| `TextFormattingToolbar::removeWhitespace` | comentado en el propio C++ |
+| `ProgressReceiver::event` | sustituido por señales de PyQt (ya son thread-safe y encoladas) |
+| `MainWindow::folderActivated` / `noteActivated` | `folder_activated_index`, `note_activated_index`, `*_selection` |
+| `NoteDescriptor::loadHtml` | `on_html_load_finished` |
+| `NoteDescriptor::findOrReCreate` | `find_or_recreate` |
+| `HtmlNoteWriter::insertMetaElement` | `_insert_meta_element` |
+| `HtmlNoteWriter::writeXml2Html` | `write_xml_2_html` (staticmethod) |
+| `XmlNoteReader::parseUuid` / `parseXml` / `readContent` | `_parse_uuid` / `_parse_xml` / `_read_content` |
+| `FindFileModel::findInFilesFinished` | `_find_in_files_finished` |
+| `FindFileModel::restoreOverrideCursor` | `QApplication.restoreOverrideCursor()` en linea |
+| `main.cpp: setStyle()` | `app.setStyle(QStyleFactory.create("Fusion"))` en `main.py` |
+
+## Traducciones (i18n)
+
+Los `.ts` se generan desde el codigo Python y desde los `.ui`, y los `.qm` se versionan
+(por eso la excepcion `!src/noblenote/translations/*.qm` en `.gitignore`).
+
+```bash
+# extraer/actualizar (conserva las traducciones ya existentes por contexto + texto)
+pylupdate6 --no-obsolete src/noblenote --ts src/noblenote/translations/noblenote_es.ts
+
+# compilar
+lrelease src/noblenote/translations/noblenote_es.ts -qm src/noblenote/translations/noblenote_es.qm
+```
+
+`main.py` carga `noblenote_<locale>.qm` despues del traductor de Qt.
+
+| idioma | traducidas |
+|--------|-----------|
+| es | 141/141 |
+| fr | 133/141 |
+| cs, de, de_DE, ms, pl, ru, uk | 116-120/141 |
+| ast | 103/141 |
+| gl | 100/141 |
+
+Los huecos restantes son textos que nunca estuvieron traducidos en el `.ts` original (no fallos
+del cableado). Los formularios traducen via `_translate()` en `ui/ui_*.py`, igual que hace pyuic6.
+
+## Verificado
+
+- `python3 -m compileall src/noblenote` sin errores.
+- Los 32 modulos importan; `MainWindow`, `Preferences`, `Trash` y `Welcome` se instancian.
+- Smoke test de 7 pasos (abajo) completo.
+- Escritura/lectura de nota HTML con UUID y `find_uuid`.
+- Traduccion en ejecucion con `es` y `fr` (textos de menu, barras, Preferencias, Papelera y Bienvenida).
+- Arranque real (`python3 -m noblenote`) hasta el dialogo de bienvenida, en offscreen.
+
+## No verificado (requiere sesion grafica)
+
+- Icono de bandeja del sistema y su menu contextual.
+- Arrastrar y soltar notas/libretas con el raton.
+- Sobrescritura de notas abiertas al cerrar la aplicacion.
+- Importacion real de archivos `.note` de tomboy/gnote.
+
+## Pendiente
+
+- [ ] Validar lo anterior en una sesion grafica real.
+- [ ] Borrar el C++ (`src/*.cpp|h`, `nobleNote.pro`, `nobleNote.qrc`, `icon.rc`) y `xorcipher.py`.
+      Recuperable con `git checkout v1.5.0-cpp -- src/`.
+- [ ] Ajustar `noblenote.desktop` (`Exec=noblenote`, `Icon=noblenote` -> instalar `noblenote.svg`
+      en `/usr/share/pixmaps/` o en el tema hicolor).
+- [ ] Rellenar los huecos de ast/gl/cs/de/ms/pl/ru/uk si se quieren completar.
+- [ ] El texto de "Acerca de" es propio del port (menciona PyQt6), asi que es una cadena nueva.
 
 ## Smoke test
 
 ```bash
-cd /home/wachin/Dev/nobleNote
-QT_QPA_PLATFORM=offscreen python3 - <<'EOF'
+cd /home/wachin/Dev/noblenote
+QT_QPA_PLATFORM=offscreen PYTHONPATH=src python3 - <<'EOF'
 import sys, os, tempfile
 from PyQt6.QtWidgets import QApplication
 app = QApplication(sys.argv)
-from pyqt6.xmlnotereader import XmlNoteReader
-from pyqt6.htmlnotereader import HtmlNoteReader
-from pyqt6.htmlnotewriter import HtmlNoteWriter
-from pyqt6.notedescriptor import NoteDescriptor
-from pyqt6.textdocument import TextDocument
-from pyqt6.textbrowser import TextBrowser
-from pyqt6.note import Note
-from pyqt6.mainwindow import MainWindow
-from pyqt6.datetimeutil import create_quid
+from noblenote.xmlnotereader import XmlNoteReader
+from noblenote.htmlnotereader import HtmlNoteReader
+from noblenote.htmlnotewriter import HtmlNoteWriter
+from noblenote.notedescriptor import NoteDescriptor
+from noblenote.textdocument import TextDocument
+from noblenote.textbrowser import TextBrowser
+from noblenote.note import Note
+from noblenote.mainwindow import MainWindow
+from noblenote.datetimeutil import create_quid
 from PyQt6.QtGui import QTextDocument as QTD, QTextCursor
 from PyQt6.QtCore import QDateTime
 
@@ -125,6 +210,7 @@ EOF
 ```
 
 Resultado esperado:
+
 ```
 1. HTML escrito: 902 bytes
 2. HTML leido titulo: Test Note | uuid ok: True
@@ -137,71 +223,54 @@ Resultado esperado:
 === SMOKE TEST OK ===
 ```
 
+En offscreen aparecen avisos inofensivos (`QFileSystemWatcher::addPaths: list is empty`,
+`This plugin does not support propagateSizeHints()`, mensajes de `Qt6CTPlatformTheme`).
+
 ## Mapeo C++ -> Python
 
 | C++ | Python |
 |-----|--------|
-| `src/mainwindow.{cpp,h}` | `pyqt6/mainwindow.py` |
-| `src/note.{cpp,h}` | `pyqt6/note.py` |
-| `src/notedescriptor.{cpp,h}` | `pyqt6/notedescriptor.py` |
-| `src/textdocument.{cpp,h}` | `pyqt6/textdocument.py` |
-| `src/textbrowser.{cpp,h}` | `pyqt6/textbrowser.py` |
-| `src/textformattingtoolbar.{cpp,h}` | `pyqt6/textformattingtoolbar.py` |
-| `src/textsearchtoolbar.{cpp,h}` | `pyqt6/textsearchtoolbar.py` |
-| `src/htmlnotereader.{cpp,h}` | `pyqt6/htmlnotereader.py` |
-| `src/htmlnotewriter.{cpp,h}` | `pyqt6/htmlnotewriter.py` |
-| `src/xmlnotereader.{cpp,h}` | `pyqt6/xmlnotereader.py` |
-| `src/xmlnotewriter.{cpp,h}` | `pyqt6/xmlnotewriter.py` |
-| `src/highlighter.{cpp,h}` | `pyqt6/highlighter.py` |
-| `src/filesystemmodel.{cpp,h}` | `pyqt6/filesystemmodel.py` |
-| `src/findfilemodel.{cpp,h}` | `pyqt6/findfilemodel.py` |
-| `src/findfilesystemmodel.{cpp,h}` | `pyqt6/findfilesystemmodel.py` |
-| `src/fileiconprovider.{cpp,h}` | `pyqt6/fileiconprovider.py` |
-| `src/lineedit.{cpp,h}` | `pyqt6/lineedit.py` |
-| `src/progressreceiver.{cpp,h}` | `pyqt6/progressreceiver.py` |
-| `src/preferences.{cpp,h}` | `pyqt6/preferences.py` |
-| `src/welcome.{cpp,h}` | `pyqt6/welcome.py` |
-| `src/trash.{cpp,h}` | `pyqt6/trash.py` |
-| `src/backup.{cpp,h}` | `pyqt6/backup.py` |
-| `src/noteimporter.{cpp,h}` | `pyqt6/noteimporter.py` |
-| `src/systemtraycreator.{cpp,h}` | `pyqt6/systemtraycreator.py` |
-| `src/datetime.{cpp,h}` | `pyqt6/datetimeutil.py` |
-| `src/xorcipher.{cpp,h}` | `pyqt6/xorcipher.py` |
-| `src/abstractnotereader.{cpp,h}` | `pyqt6/abstractnotereader.py` |
-| `src/ui/*.ui` | `pyqt6/ui/ui_*.py` |
+| `src/mainwindow.{cpp,h}` | `src/noblenote/mainwindow.py` |
+| `src/note.{cpp,h}` | `src/noblenote/note.py` |
+| `src/notedescriptor.{cpp,h}` | `src/noblenote/notedescriptor.py` |
+| `src/textdocument.{cpp,h}` | `src/noblenote/textdocument.py` |
+| `src/textbrowser.{cpp,h}` | `src/noblenote/textbrowser.py` |
+| `src/textformattingtoolbar.{cpp,h}` | `src/noblenote/textformattingtoolbar.py` |
+| `src/textsearchtoolbar.{cpp,h}` | `src/noblenote/textsearchtoolbar.py` |
+| `src/htmlnotereader.{cpp,h}` | `src/noblenote/htmlnotereader.py` |
+| `src/htmlnotewriter.{cpp,h}` | `src/noblenote/htmlnotewriter.py` |
+| `src/xmlnotereader.{cpp,h}` | `src/noblenote/xmlnotereader.py` |
+| `src/xmlnotewriter.{cpp,h}` | `src/noblenote/xmlnotewriter.py` |
+| `src/highlighter.{cpp,h}` | `src/noblenote/highlighter.py` |
+| `src/filesystemmodel.{cpp,h}` | `src/noblenote/filesystemmodel.py` |
+| `src/findfilemodel.{cpp,h}` | `src/noblenote/findfilemodel.py` |
+| `src/findfilesystemmodel.{cpp,h}` | `src/noblenote/findfilesystemmodel.py` |
+| `src/fileiconprovider.{cpp,h}` | `src/noblenote/fileiconprovider.py` |
+| `src/lineedit.{cpp,h}` | `src/noblenote/lineedit.py` |
+| `src/progressreceiver.{cpp,h}` | `src/noblenote/progressreceiver.py` |
+| `src/preferences.{cpp,h}` | `src/noblenote/preferences.py` |
+| `src/welcome.{cpp,h}` | `src/noblenote/welcome.py` |
+| `src/trash.{cpp,h}` | `src/noblenote/trash.py` |
+| `src/backup.{cpp,h}` | `src/noblenote/backup.py` |
+| `src/noteimporter.{cpp,h}` | `src/noblenote/noteimporter.py` |
+| `src/systemtraycreator.{cpp,h}` | `src/noblenote/systemtraycreator.py` |
+| `src/datetime.{cpp,h}` | `src/noblenote/datetimeutil.py` |
+| `src/xorcipher.{cpp,h}` | `src/noblenote/xorcipher.py` (sin uso) |
+| `src/abstractnotereader.{cpp,h}` | `src/noblenote/abstractnotereader.py` |
+| `src/ui/*.ui` | `src/noblenote/ui/ui_*.py` |
+| `nobleNote.qrc` | `src/noblenote/resources.py` + `icons/` |
+| `nobleNote.pro` (`TRANSLATIONS`) | `pylupdate6` + `lrelease` (ver arriba) |
+| `version.txt` | `src/noblenote/version.txt` (leido por `version.py`) |
 
 ## Diferencias de API Qt5 -> Qt6 aplicadas
 
 | Problema | Solucion |
 |----------|----------|
 | `QAction(QPixmap, ...)` | `QAction(QIcon(QPixmap), ...)` |
-| `setFilter([flag1, flag2])` | `setFilter(flag1 | flag2)` |
+| `setFilter([flag1, flag2])` | `setFilter(flag1 \| flag2)` |
 | `entryList([filter])` | `entryList(filter)` |
 | `QAbstractItemView.SelectionFlag` | `QItemSelectionModel.SelectionFlag` |
-| `QFileIconProvider` en QtGui | Movido a `QtWidgets` |
-| `QFileSystemModel` en QtCore | Movido a `QtGui` |
-| `QTreeWidgetItemFromPtr` | No existe en PyQt6 (eliminado) |
-| `isEmpty()` en model indexes | Reemplazado por `not indexes()` |
-
-## Notas importantes
-
-1. **XmlNoteWriter** no tiene consumidores directos en el codigo actual (solo se usa HtmlNoteWriter). Existe como utilidad y para `write_xml_2_html()`.
-
-2. **NoteDescriptor** carga notas HTML de forma asincrona (thread). El uuid puede ser `None` inmediatamente despues de construir el objeto; se popula tras `loadFinished`.
-
-3. **Los archivos `.ui`** originales estan en `src/ui/`. Los archivos `pyqt6/ui/ui_*.py` se generan con `pyuic6` si se regeneran desde los `.ui`.
-
-4. **Recursos**: `resources.py` usa un enfoque simplificado. Los iconos originales estan en `nobleNote.qrc` (C++). El puerto usa `QIcon.fromTheme()` y placeholders.
-
-5. **Portabilidad**: el codigo usa `QSettings` y `QStandardPaths` para rutas configurables, igual que el C++.
-
-## Proximos pasos sugeridos
-
-- [ ] Agregar tests unitarios (pytest) para cada modulo
-- [ ] Integrar los recursos/iconos originales via `pyrcc6`
-- [ ] Agregar type hints completos
-- [ ] Documentar funciones publicas con docstrings
-- [ ] Agregar logging en vez de prints
-- [ ] Implementar `write_xml_2_html()` como CLI tool de migracion
-- [ ] Agregar soporte para arrastrar/soltar (drag & drop) entre carpetas
-- [ ] Tests de integracion con notas reales de tomboy/gnote
+| `QFileIconProvider` en QtGui | movido a `QtWidgets` |
+| `QFileSystemModel` en QtCore | movido a `QtGui` |
+| `QTreeWidgetItemFromPtr` | no existe en PyQt6 (eliminado) |
+| `isEmpty()` en indexes | reemplazado por `not indexes()` |
