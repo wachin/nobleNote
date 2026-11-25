@@ -11,12 +11,19 @@ makes them invisible on a dark color scheme.  Those monochrome icons are
 re-rendered with the palette's text color, keeping the original grey levels as
 opacity.  Colored icons (the logo, the eraser, the folder glyphs, ...) are
 returned untouched, and nothing changes on light color schemes.
+
+A few icons have a redrawn version for dark color schemes (flat light glyphs).
+They live in the dark/ subdirectory under the same file name; on a dark scheme
+they take precedence and their flat color is replaced with the palette text
+color, so they keep following the color scheme (and qt6ct) as well.
 """
 
 import re
 from pathlib import Path
 
-from PyQt6.QtCore import QEvent, QObject, QRectF, Qt, QTimer, pyqtSignal
+from PyQt6.QtCore import (
+    QByteArray, QEvent, QObject, QRectF, Qt, QTimer, pyqtSignal,
+)
 from PyQt6.QtGui import QColor, QIcon, QImage, QPainter, QPalette, QPixmap
 from PyQt6.QtWidgets import QApplication
 
@@ -26,6 +33,9 @@ except ImportError:  # pragma: no cover - fall back to the plain svg icon
     QSvgRenderer = None
 
 ICON_DIR = Path(__file__).resolve().parent / "icons"
+
+# Icons redrawn for dark color schemes, picked by file name when one exists.
+DARK_ICON_DIR = ICON_DIR / "dark"
 
 # aliases as defined in nobleNote.qrc
 _ALIASES = {
@@ -60,7 +70,7 @@ _icon_cache = {}
 
 def icon_path(name: str) -> str:
     """Return the absolute path of the icon with the given alias (or name)."""
-    return str(ICON_DIR / _ALIASES.get(name, name))
+    return str(_variant_path(name))
 
 
 def _hex_luminance(hex_color: str) -> float:
@@ -87,6 +97,64 @@ def _text_color() -> QColor:
     return app.palette().color(QPalette.ColorRole.WindowText)
 
 
+def _is_dark_scheme() -> bool:
+    """True when the application uses a dark color scheme (light text)."""
+    color = _text_color()
+    return color.isValid() and _hex_luminance(color.name()) >= 0.5
+
+
+def _variant_path(name: str) -> Path:
+    """The svg of this alias for the current color scheme.
+
+    On a dark scheme a redrawn icon in dark/ wins over the default one; icons
+    that only exist in one version are shared by both schemes.
+    """
+    filename = _ALIASES.get(name, name)
+    if _is_dark_scheme():
+        redrawn = DARK_ICON_DIR / filename
+        if redrawn.exists():
+            return redrawn
+    return ICON_DIR / filename
+
+
+def _render(renderer, size: int) -> QImage:
+    """Render the svg at the given size on a transparent image."""
+    rendered = QImage(size, size, QImage.Format.Format_ARGB32)
+    rendered.fill(Qt.GlobalColor.transparent)
+    painter = QPainter(rendered)
+    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    renderer.render(painter, QRectF(0, 0, size, size))
+    painter.end()
+    return rendered
+
+
+def _render_svg(svg: str):
+    """A multi size QIcon for the given svg markup, or None if unusable."""
+    if QSvgRenderer is None:
+        return None
+    renderer = QSvgRenderer(QByteArray(svg.encode("utf-8")))
+    if not renderer.isValid():
+        return None
+    qicon = QIcon()
+    for size in _ICON_SIZES:
+        qicon.addPixmap(QPixmap.fromImage(_render(renderer, size)))
+    return qicon
+
+
+def _retint_redrawn(path: Path, color: QColor):
+    """Paint a flat redrawn dark glyph in the palette text color.
+
+    The redrawn icons are light glyphs (#e6e6e6); the grey to opacity mapping
+    above would turn them into ghosts, so their flat color is replaced instead.
+    """
+    try:
+        svg = path.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    if not _is_monochrome(svg):
+        return None
+    return _render_svg(_HEX_COLOR.sub(color.name(), svg))
+
 def _adapt_to_palette(path: Path, qicon: QIcon) -> QIcon:
     """Re-render a monochrome dark svg with the palette text color."""
     color = _text_color()
@@ -111,12 +179,7 @@ def _adapt_to_palette(path: Path, qicon: QIcon) -> QIcon:
 
     adapted = QIcon()
     for size in _ICON_SIZES:
-        rendered = QImage(size, size, QImage.Format.Format_ARGB32)
-        rendered.fill(Qt.GlobalColor.transparent)
-        painter = QPainter(rendered)
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-        renderer.render(painter, QRectF(0, 0, size, size))
-        painter.end()
+        rendered = _render(renderer, size)
 
         # the grey level of every pixel becomes its opacity in the text color
         tinted = QImage(size, size, QImage.Format.Format_ARGB32)
@@ -198,9 +261,15 @@ def palette_watcher():
 
 def icon(name: str) -> QIcon:
     """Return the QIcon for the given resource alias."""
-    path = ICON_DIR / _ALIASES.get(name, name)
-    if path.exists():
-        qicon = QIcon(str(path))
-        return _adapt_to_palette(path, qicon)
-    # fall back to the theme icon when the svg is not present
-    return QIcon.fromTheme(name)
+    path = _variant_path(name)
+    if not path.exists():
+        # fall back to the theme icon when the svg is not present
+        return QIcon.fromTheme(name)
+    if path.parent == DARK_ICON_DIR:
+        color = _text_color()
+        key = (str(path), color.name())
+        if key not in _icon_cache:
+            _icon_cache[key] = (_retint_redrawn(path, color)
+                                or _adapt_to_palette(path, QIcon(str(path))))
+        return _icon_cache[key]
+    return _adapt_to_palette(path, QIcon(str(path)))

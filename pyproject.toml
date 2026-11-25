@@ -48,6 +48,7 @@ noblenote = [
     "version.txt",
     "icons/*.svg",
     "icons/*.ico",
+    "icons/dark/*.svg",
     "translations/*.ts",
     "translations/*.qm",
     "ui/*.ui",
