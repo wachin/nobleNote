@@ -38,7 +38,7 @@ class Welcome(QDialog, Ui_Welcome):
         else:
             standard_path = QDir.homePath()
         directory = QFileDialog.getExistingDirectory(
-            self, "Choose a directory", standard_path,
+            self, self.tr("Choose a directory"), standard_path,
             QFileDialog.Option.ShowDirsOnly | QFileDialog.Option.DontResolveSymlinks)
         if directory:
             self.path.setText(directory)
@@ -55,28 +55,28 @@ class Welcome(QDialog, Ui_Welcome):
                      root_path_is_writable: bool):
         if self.is_portable:
             if not root_path_is_set:
-                self.welcomeText.setText(
+                self.welcomeText.setText(self.tr(
                     "Welcome to nobleNote!\nThis is the first time that "
                     "nobleNote has been started.\nThis is the portable edition "
                     "of nobleNote.\nYou are encouraged to use the default path, "
-                    "but you can also choose any other directory.")
+                    "but you can also choose any other directory."))
             elif root_path_is_set and not root_path_exists:
-                self.welcomeText.setText(
+                self.welcomeText.setText(self.tr(
                     "Welcome to nobleNote!\nThe set path for the notes does not "
                     "exist.\nMaybe it has been moved or renamed.\nYou can choose "
                     "a new directory where the notes are or where they will be "
-                    "saved in.")
+                    "saved in."))
             elif root_path_exists and not root_path_is_writable:
-                self.welcomeText.setText(
+                self.welcomeText.setText(self.tr(
                     "Welcome to nobleNote!\nThe path where the notes are located "
                     "is not writable.\nMaybe your drive is running in read only "
-                    "mode.")
+                    "mode."))
         else:
             if not root_path_is_set:
-                self.welcomeText.setText(
+                self.welcomeText.setText(self.tr(
                     "Welcome to nobleNote!\nThis is the first time that "
                     "nobleNote has been started.\nYou can choose a directory "
-                    "where the notes will be saved in.")
+                    "where the notes will be saved in."))
             elif root_path_is_set and not root_path_exists:
                 self.welcomeText.setText(
                     "Welcome to nobleNote!\nThe set path for the notes does not "
@@ -84,7 +84,7 @@ class Welcome(QDialog, Ui_Welcome):
                     "a new directory where the notes are or where they will be "
                     "saved in.")
             elif root_path_exists and not root_path_is_writable:
-                self.welcomeText.setText(
+                self.welcomeText.setText(self.tr(
                     "Welcome to nobleNote!\nThe path where the notes are located "
                     "is not writable.\nYou can choose a new directory where the "
-                    "notes will be saved in. Otherwise changes might not be saved.")
+                    "notes will be saved in. Otherwise changes might not be saved."))

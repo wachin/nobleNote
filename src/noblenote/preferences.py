@@ -76,14 +76,16 @@ class Preferences(QDialog, Ui_Preferences):
 
     def save_settings(self):
         if not self.settings.isWritable():
-            QMessageBox.warning(self, "Warning", "Could not write settings!")
+            QMessageBox.warning(self, self.tr("Warning"),
+                                self.tr("Could not write settings!"))
 
         if self.root_path != self.original_root_path:
             answer = QMessageBox.question(
-                self, "Keep old trash folder?",
-                "Do you want to keep the old trash folder associated with the "
-                "path %1? (You will be able to see the old files in the trash "
-                "again if you change back to the previous directory.)"
+                self, self.tr("Keep old trash folder?"),
+                self.tr("Do you want to keep the old trash folder associated "
+                        "with the path %1? (You will be able to see the old "
+                        "files in the trash again if you change back to the "
+                        "previous directory.)")
                 .replace("%1", QDir.toNativeSeparators(
                     str(self.settings.value("backup_dir_path", "")))),
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
@@ -97,7 +99,9 @@ class Preferences(QDialog, Ui_Preferences):
                                 backup.unlink(missing_ok=True)
                         Path(backup_dir).rmdir()
                     except OSError:
-                        pass
+                        QMessageBox.warning(
+                            self, self.tr("Couldn't delete trash folder"),
+                            self.tr("Could not delete the trash folder!"))
             self.settings.setValue("root_path", self.root_path)
             self.pathChanged.emit()
 
@@ -123,13 +127,13 @@ class Preferences(QDialog, Ui_Preferences):
 
     def open_dir(self) -> str:
         path = QFileDialog.getExistingDirectory(
-            self, "Open Directory", self.root_path,
+            self, self.tr("Open Directory"), self.root_path,
             QFileDialog.Option.ShowDirsOnly
             | QFileDialog.Option.DontResolveSymlinks)
         info = QFileInfo(path)
         if not info.isWritable() and path:
-            QMessageBox.warning(self, "No Write Access",
-                                'The path "%1" is not writable!'
+            QMessageBox.warning(self, self.tr("No Write Access"),
+                                self.tr('The path "%1" is not writable!')
                                 .replace("%1", QDir.toNativeSeparators(info.filePath())))
             return ""
         return path
@@ -139,4 +143,5 @@ class Preferences(QDialog, Ui_Preferences):
         if new_path:
             self.root_path = new_path
             self.rootPathLabel.setText(self.root_path)
-            self.backupPathLabel.setText("(Will be updated after pressing OK.)")
+            self.backupPathLabel.setText(
+                self.tr("(Will be updated after pressing OK.)"))

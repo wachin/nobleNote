@@ -32,8 +32,10 @@ class NoteImporter(QObject):
         self.import_files.clear()
 
         self.file_dialog = QFileDialog(
-            self.parent_widget, "Select one or more tomboy or gnote notes",
-            str(QSettings().value("import_path", "")), "Notes (*.note)")
+            self.parent_widget,
+            self.tr("Select one or more tomboy or gnote notes"),
+            str(QSettings().value("import_path", "")),
+            self.tr("Notes") + " (*.note)")
         self.file_dialog.setViewMode(QFileDialog.ViewMode.Detail)
         self.file_dialog.setAcceptMode(QFileDialog.AcceptMode.AcceptOpen)
         self.file_dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
@@ -51,7 +53,7 @@ class NoteImporter(QObject):
                              QFileInfo(self.import_files[-1]).absolutePath())
 
         self.dialog = QProgressDialog(self.parent_widget)
-        self.dialog.setLabelText("Importing notes...")
+        self.dialog.setLabelText(self.tr("Importing notes..."))
         self.dialog.setRange(0, len(self.import_files))
 
         self.progress_receiver = ProgressReceiver(self.parent_widget)

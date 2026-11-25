@@ -68,8 +68,9 @@ class Trash(QDialog, Ui_Trash):
             files.append(data_list[0])
 
         answer = QMessageBox.warning(
-            self, "Deleting notes",
-            "Are you sure you want to permanently delete the selected notes?",
+            self, self.tr("Deleting notes"),
+            self.tr("Are you sure you want to permanently delete the "
+                    "selected notes?"),
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Abort)
         if answer != QMessageBox.StandardButton.Yes:
             return

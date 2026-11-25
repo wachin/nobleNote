@@ -7,7 +7,7 @@ import threading
 from pathlib import Path
 
 from PyQt6.QtCore import QDateTime, QDir, QFileInfo, QObject, QSettings, QTimer, Qt, pyqtSignal
-from PyQt6.QtWidgets import QMessageBox, QTextBrowser
+from PyQt6.QtWidgets import QApplication, QMessageBox, QTextBrowser
 
 from .datetimeutil import create_quid, is_null
 from .htmlnotereader import HtmlNoteReader
@@ -90,11 +90,13 @@ class NoteDescriptor(QObject):
         if (self.last_change_.toSecsSinceEpoch()
                 < QFileInfo(self.file_path_).lastModified().toSecsSinceEpoch()):
             if self.document_.isModified():
+                app_name = QApplication.instance().applicationName()
                 answer = QMessageBox.warning(
-                    self.note_widget_, "Note modified",
-                    "This note has been modified by another instance of "
-                    "nobleNote. Should the note be saved under a different "
-                    "name? Else the note will be reloaded.",
+                    self.note_widget_, self.tr("Note modified"),
+                    self.tr("This note has been modified by another instance "
+                            "of %1. Should the note be saved under a different "
+                            "name? Else the note will be reloaded.")
+                    .replace("%1", app_name),
                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
                 if answer == QMessageBox.StandardButton.Yes:
                     self.uuid_ = create_quid()
@@ -118,9 +120,9 @@ class NoteDescriptor(QObject):
 
         if not new_file_path:
             answer = QMessageBox.warning(
-                self.note_widget_, "Note does not exist",
-                "This note does not longer exist. Do you want to keep the "
-                "editor open?",
+                self.note_widget_, self.tr("Note does not exist"),
+                self.tr("This note does not longer exist. Do you want to keep "
+                        "the editor open?"),
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
             if answer == QMessageBox.StandardButton.Yes:
                 self.title_ = QFileInfo(self.file_path_).baseName()

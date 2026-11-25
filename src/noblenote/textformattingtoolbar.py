@@ -16,11 +16,11 @@ class TextFormattingToolbar(QToolBar):
     def __init__(self, text_edit: QTextEdit, parent=None):
         super().__init__(parent)
         self.text_edit_ = text_edit
-        self.setWindowTitle("Format actions")
+        self.setWindowTitle(self.tr("Format actions"))
         self.setObjectName("Formattoolbar")
 
         # Bold
-        self.action_text_bold = QAction(icon("bold"), "&Bold", self)
+        self.action_text_bold = QAction(icon("bold"), self.tr("&Bold"), self)
         self.action_text_bold.setShortcut(QKeySequence("Ctrl+B"))
         bold = QFont()
         bold.setBold(True)
@@ -30,7 +30,7 @@ class TextFormattingToolbar(QToolBar):
         self.action_text_bold.setCheckable(True)
 
         # Italic
-        self.action_text_italic = QAction(icon("italic"), "&Italic", self)
+        self.action_text_italic = QAction(icon("italic"), self.tr("&Italic"), self)
         self.action_text_italic.setShortcut(QKeySequence("Ctrl+I"))
         italic = QFont()
         italic.setItalic(True)
@@ -40,7 +40,7 @@ class TextFormattingToolbar(QToolBar):
         self.action_text_italic.setCheckable(True)
 
         # Underline
-        self.action_text_underline = QAction(icon("underlined"), "&Underline", self)
+        self.action_text_underline = QAction(icon("underlined"), self.tr("&Underline"), self)
         self.action_text_underline.setShortcut(QKeySequence("Ctrl+U"))
         underline = QFont()
         underline.setUnderline(True)
@@ -50,7 +50,7 @@ class TextFormattingToolbar(QToolBar):
         self.action_text_underline.setCheckable(True)
 
         # Strike out
-        self.action_text_strike_out = QAction(icon("strikedout"), "&Strike Out", self)
+        self.action_text_strike_out = QAction(icon("strikedout"), self.tr("&Strike Out"), self)
         self.action_text_strike_out.setShortcut(QKeySequence("Ctrl+S"))
         strike_out = QFont()
         strike_out.setStrikeOut(True)
@@ -60,19 +60,19 @@ class TextFormattingToolbar(QToolBar):
         self.action_text_strike_out.setCheckable(True)
 
         # Hyperlink
-        self.action_insert_hyperlink = QAction(icon("hyperlink"), "&Hyperlink", self)
+        self.action_insert_hyperlink = QAction(icon("hyperlink"), self.tr("&Hyperlink"), self)
         self.action_insert_hyperlink.setShortcut(QKeySequence("Ctrl+K"))
         self.action_insert_hyperlink.triggered.connect(self.insert_hyperlink)
         self.addAction(self.action_insert_hyperlink)
 
         # Clear formatting
-        self.action_clear_formatting = QAction(icon("clearFormatting"), "&Clear formatting", self)
+        self.action_clear_formatting = QAction(icon("clearFormatting"), self.tr("&Clear formatting"), self)
         self.action_clear_formatting.setShortcut(QKeySequence("Ctrl+Space"))
         self.action_clear_formatting.triggered.connect(self.clear_char_format)
         self.addAction(self.action_clear_formatting)
 
         # Bullet points
-        self.action_bullet_point = QAction(icon("bulletpoints"), "Bullet point", self)
+        self.action_bullet_point = QAction(icon("bulletpoints"), self.tr("Bullet point"), self)
         self.action_bullet_point.setShortcut(QKeySequence("Ctrl+Shift+L"))
         self.action_bullet_point.setCheckable(True)
         self.action_bullet_point.triggered.connect(self.insert_bullet_points)
@@ -81,14 +81,14 @@ class TextFormattingToolbar(QToolBar):
         # Text color
         text_pix = QPixmap(16, 16)
         text_pix.fill(self.text_edit_.palette().windowText().color())
-        self.action_text_color = QAction(QIcon(text_pix), "&Text color...", self)
+        self.action_text_color = QAction(QIcon(text_pix), self.tr("&Text color..."), self)
         self.action_text_color.triggered.connect(self.colored_text)
         self.addAction(self.action_text_color)
 
         # Background color
         b_pix = QPixmap(16, 16)
         b_pix.fill(self.text_edit_.palette().base().color())
-        self.action_text_bcolor = QAction(QIcon(b_pix), "&Background color...", self)
+        self.action_text_bcolor = QAction(QIcon(b_pix), self.tr("&Background color..."), self)
         self.action_text_bcolor.triggered.connect(self.marked_text)
         self.addAction(self.action_text_bcolor)
 
@@ -191,8 +191,10 @@ class TextFormattingToolbar(QToolBar):
     def insert_hyperlink(self):
         cursor = self.text_edit_.textCursor()
         selected_text = cursor.selectedText()
-        link, ok = QInputDialog.getText(self.text_edit_, "Insert hyperlink",
-                                        "Addr&ess:", QLineEdit.EchoMode.Normal,
+        link, ok = QInputDialog.getText(self.text_edit_,
+                                        self.tr("Insert hyperlink"),
+                                        self.tr("Addr&ess:"),
+                                        QLineEdit.EchoMode.Normal,
                                         selected_text)
         if not ok:
             return

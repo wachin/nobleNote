@@ -2,15 +2,17 @@
 # Licensed under the MIT license.
 """Note window form (equivalent of ui/note.ui)."""
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QCoreApplication, Qt
 from PyQt6.QtWidgets import QGridLayout, QMainWindow, QWidget
 
 from ..resources import icon
 
+_translate = QCoreApplication.translate
+
 
 class Ui_Note:
     def setupUi(self, note_window: QMainWindow):
-        note_window.setWindowTitle("Note-Editor")
+        note_window.setWindowTitle(_translate("Note", "Note-Editor"))
         note_window.setWindowIcon(icon("nobleNote"))
 
         self.centralwidget = QWidget(note_window)

@@ -16,7 +16,7 @@ class TextSearchToolbar(QToolBar):
         super().__init__(parent)
         self.text_edit_ = text_edit
         self.highlighter = None
-        self.setWindowTitle("Search bar")
+        self.setWindowTitle(self.tr("Search bar"))
         self.setObjectName("Searchtoolbar")
 
         self.typing_timer = QTimer(self)
@@ -31,19 +31,20 @@ class TextSearchToolbar(QToolBar):
         self.addWidget(self.close_search)
 
         self.search_line_ = LineEdit(self)
-        self.search_line_.setPlaceholderText("Enter search argument")
+        self.search_line_.setPlaceholderText(
+            self.tr("Enter search argument"))
         self.addWidget(self.search_line_)
 
         self.find_previous = QToolButton(self)
-        self.find_previous.setText("Find &previous")
+        self.find_previous.setText(self.tr("Find &previous"))
         self.addWidget(self.find_previous)
 
         self.find_next = QToolButton(self)
-        self.find_next.setText("Find &next")
+        self.find_next.setText(self.tr("Find &next"))
         self.addWidget(self.find_next)
 
         self.case_sensitive_box = QCheckBox(self)
-        self.case_sensitive_box.setText("&Case sensitive")
+        self.case_sensitive_box.setText(self.tr("&Case sensitive"))
         self.addWidget(self.case_sensitive_box)
 
         self.close_search.clicked.connect(self.hide)

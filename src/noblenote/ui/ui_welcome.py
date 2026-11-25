@@ -2,15 +2,17 @@
 # Licensed under the MIT license.
 """Welcome dialog form (equivalent of ui/welcome.ui)."""
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QCoreApplication, Qt
 from PyQt6.QtWidgets import (QDialog, QDialogButtonBox, QGridLayout, QLabel,
                              QPushButton, QSizePolicy, QSpacerItem, QWidget)
+
+_translate = QCoreApplication.translate
 
 
 class Ui_Welcome:
     def setupUi(self, welcome_dialog: QDialog):
         welcome_dialog.resize(421, 220)
-        welcome_dialog.setWindowTitle("Welcome to nobleNote")
+        welcome_dialog.setWindowTitle(_translate("Welcome", "Welcome to nobleNote"))
 
         self.gridLayout = QGridLayout(welcome_dialog)
         self.gridLayout.setObjectName("gridLayout")
@@ -30,7 +32,7 @@ class Ui_Welcome:
         self.gridLayout.addWidget(self.welcomeText, 1, 0, 1, 2)
 
         self.browse = QPushButton(welcome_dialog)
-        self.browse.setText("&Browse")
+        self.browse.setText(_translate("Welcome", "&Browse"))
         self.browse.setObjectName("browse")
         self.gridLayout.addWidget(self.browse, 3, 1)
 

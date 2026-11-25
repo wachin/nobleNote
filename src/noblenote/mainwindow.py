@@ -48,8 +48,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.create_and_update_recent()
 
         # tray icon
-        self.minimize_restore_action = QAction("&Restore", self)
-        self.action_quit_systray_menu = QAction("&Quit", self)
+        self.minimize_restore_action = QAction(self.tr("&Restore"), self)
+        self.action_quit_systray_menu = QAction(self.tr("&Quit"), self)
 
         self.t_icon = None
         self.i_menu = None
@@ -92,7 +92,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 # ------------------------------------------------------------------
         # search line edits
         self.search_text = LineEdit(self)
-        self.search_text.setPlaceholderText("Type to search for notes")
+        self.search_text.setPlaceholderText(self.tr("Type to search for notes"))
         self.gridLayout.addWidget(self.search_text, 2, 0)
 
         self.splitter = QSplitter(self.centralwidget)
@@ -293,7 +293,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # make sure there is at least one folder
         dir_list = QDir(root_path).entryList(QDir.Filter.Dirs | QDir.Filter.NoDotAndDotDot)
         if not dir_list:
-            default_dir_name = "default"
+            default_dir_name = self.tr("default")
             QDir(root_path).mkdir(default_dir_name)
             self.note_view.setRootIndex(
                 self.note_model.setRootPath(root_path + "/" + default_dir_name))
@@ -435,9 +435,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 ind = self.note_view.currentIndex()
             note_path = self.note_model.filePath(ind)
             if not QFileInfo(note_path).exists():
-                QMessageBox.warning(self, "Note does not exist",
-                                    "The selected note cannot be opened because "
-                                    "it has been moved or renamed!")
+                QMessageBox.warning(self, self.tr("Note does not exist"),
+                                    self.tr("The selected note cannot be opened "
+                                            "because it has been moved or "
+                                            "renamed!"))
                 return
             self.open_one_note(note_path)
 
@@ -466,11 +467,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             recent_note_list.pop()
         QSettings().setValue("Recent_notes", recent_note_list)
     def new_folder(self):
-        path = self.folder_model.rootPath() + "/" + "new notebook"
+        path = self.folder_model.rootPath() + "/" + self.tr("new notebook")
         counter = 0
         while Path(path).exists():
             counter += 1
-            path = self.folder_model.rootPath() + "/new notebook (%d)" % counter
+            path = self.folder_model.rootPath() + "/" + \
+                self.tr("new notebook (%1)").replace("%1", str(counter))
         idx = self.folder_model.mkdir(self.folder_view.rootIndex(),
                                       QDir(path).dirName())
         if idx.isValid():
@@ -482,11 +484,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.folder_view.selectionModel().selectedRows()[0])
 
     def new_note(self):
-        file_path = self.note_model.rootPath() + "/" + "new note"
+        file_path = self.note_model.rootPath() + "/" + self.tr("new note")
         counter = 0
         while Path(file_path).exists():
             counter += 1
-            file_path = self.note_model.rootPath() + "/new note (%d)" % counter
+            file_path = self.note_model.rootPath() + "/" + \
+                self.tr("new note (%1)").replace("%1", str(counter))
         try:
             Path(file_path).touch()
         except OSError:
@@ -520,9 +523,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # keep at least one folder
         if len(dir_list) == 1:
-            QMessageBox.information(self, "Notebook could not be deleted",
-                                    "The notebook could not be deleted because "
-                                    "one notebook must remain")
+            QMessageBox.information(
+                self, self.tr("Notebook could not be deleted"),
+                self.tr("The notebook could not be deleted because one "
+                        "notebook must remain"))
             return
 
         idx = self.folder_view.selectionModel().selectedRows()[0]
@@ -530,9 +534,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # remove empty folders without prompt else show a yes/abort message box
         if not self.folder_model.rmdir(idx):  # folder not empty
             answer = QMessageBox.warning(
-                self, "Delete Notebook",
-                'Are you sure you want to delete the notebook "%1" and move '
-                'all containing notes to the trash?'
+                self, self.tr("Delete Notebook"),
+                self.tr('Are you sure you want to delete the notebook "%1" '
+                        'and move all containing notes to the trash?')
                 .replace("%1", self.folder_model.fileName(idx)),
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Abort)
             if answer != QMessageBox.StandardButton.Yes:
@@ -552,9 +556,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # try to remove the (now empty?) folder again
             if not self.folder_model.rmdir(idx):
                 QMessageBox.warning(
-                    self, "Notebook could not be deleted",
-                    "The notebook could not be deleted because one or more "
-                    "notes inside the notebook could not be deleted.")
+                    self, self.tr("Notebook could not be deleted"),
+                    self.tr("The notebook could not be deleted because one or "
+                            "more notes inside the notebook could not be "
+                            "deleted."))
                 return
 
     def set_kinetic_scrolling_enabled(self, enabled: bool):
@@ -599,7 +604,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if self.note_view.selectionModel().selectedRows().count() == 1:
                 menu.addAction(self.actionRename_note)
             else:
-                open_all = QAction("&Open notes", menu)
+                open_all = QAction(self.tr("&Open notes"), menu)
                 open_all.triggered.connect(self.open_all_notes)
                 menu.addAction(open_all)
             menu.addAction(self.actionDelete_note)
@@ -607,7 +612,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # show source code menu entry
             if (bool(QSettings().value("show_source", False))
                     and len(self.note_view.selectionModel().selectedRows()) == 1):
-                show_source = QAction("Show &Source", menu)
+                show_source = QAction(self.tr("Show &Source"), menu)
                 show_source.triggered.connect(self.open_note_source)
                 menu.addAction(show_source)
             menu.addSeparator()
@@ -651,10 +656,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 copy_error_files += '"%s"\n' % note_path
 
         if copy_error_files:
-            QMessageBox.critical(self, "Copy error",
-                                 "Notes of the same names already exist in "
-                                 "this notebook:\n\n"
-                                 + QDir.toNativeSeparators(copy_error_files))
+            QMessageBox.critical(
+                self, self.tr("Copy error"),
+                self.tr("Notes of the same names already exist in this "
+                        "notebook:\n\n%1")
+                .replace("%1", QDir.toNativeSeparators(copy_error_files)))
         self.shortcut_note_list.clear()
         self.action_Paste.setDisabled(True)
 
@@ -687,16 +693,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def about(self):
         version = APP_VERSION
         app_name = QApplication.instance().applicationName() or "nobleNote"
-        html = ("<h1>{0} version {1}</h1>"
-                "<p><b>{0}</b> is a note taking application</p>"
-                "<p>Copyright © 2020 Christian Metscher</p>"
-                "<p>This is the PyQt6 port of nobleNote.</p>"
-                "<p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF "
-                "ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO "
-                "THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR "
-                "PURPOSE AND NONINFRINGEMENT.</p>"
-                "<p>PyQt6</p>").format(app_name, version)
-        QMessageBox.about(self, "About " + app_name, html)
+        html = self.tr("<h1>{0} version {1}</h1>"
+                       "<p><b>{0}</b> is a note taking application</p>"
+                       "<p>Copyright © 2020 Christian Metscher</p>"
+                       "<p>This is the PyQt6 port of nobleNote.</p>"
+                       "<p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT "
+                       "WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING "
+                       "BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, "
+                       "FITNESS FOR A PARTICULAR PURPOSE AND "
+                       "NONINFRINGEMENT.</p>"
+                       "<p>PyQt6</p>").format(app_name, version)
+        QMessageBox.about(self, self.tr("About ") + app_name, html)
 
     def remove_note(self):
         if not self.note_view.selectionModel().selectedRows():
@@ -713,16 +720,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if self.note_model.allSizeZero(selected):
             # zero size files do not go to the trash
-            title = "Deleting notes"
-            text = ("Are you sure you want to permanently delete the selected "
-                    "notes?")
+            title = self.tr("Deleting notes")
+            text = self.tr("Are you sure you want to permanently delete the "
+                           "selected notes?")
         elif num_notes > 1:
-            title = "Delete Multiple Notes"
-            text = ("Are you sure you want to move these %d notes to the "
-                    "trash?\n\n%s" % (num_notes, names))
+            title = self.tr("Delete Multiple Notes")
+            text = (self.tr("Are you sure you want to move these %1 notes to "
+                            "the trash?\n\n%2")
+                    .replace("%1", str(num_notes)).replace("%2", names))
         else:
-            title = "Delete Note"
-            text = "Are you sure you want to move the note %s to the trash?" % names
+            title = self.tr("Delete Note")
+            text = self.tr("Are you sure you want to move the note %1 to the "
+                           "trash?").replace("%1", names)
 
         if QMessageBox.warning(self, title, text,
                                QMessageBox.StandardButton.Yes
@@ -866,7 +875,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.hide()
 
     def showEvent(self, event):
-        self.minimize_restore_action.setText("&Minimize")
+        self.minimize_restore_action.setText(self.tr("&Minimize"))
         if QSettings().contains("mainwindow_size"):
             data = QSettings().value("mainwindow_size", b"")
             if isinstance(data, (bytes, bytearray)):
@@ -899,7 +908,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 note.show_after_loaded()
 
     def hideEvent(self, event):
-        self.minimize_restore_action.setText("&Restore")
+        self.minimize_restore_action.setText(self.tr("&Restore"))
         super().hideEvent(event)
 
     def show_backup_window(self):

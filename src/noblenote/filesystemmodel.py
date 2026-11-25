@@ -62,15 +62,19 @@ class FileSystemModel(QFileSystemModel):
             if not dropped:
                 if remaining:
                     existing_files = "\n".join(remaining) + "\n"
-                    title = "Files could not be dropped"
-                    text = ("The files could not be dropped because files of the "
-                            "same names are already existing in this notebook:\n\n"
-                            + QDir.toNativeSeparators(existing_files))
+                    title = self.tr("Files could not be dropped")
+                    text = (self.tr("The files could not be dropped because "
+                                    "files of the same names are already "
+                                    "existing in this notebook:\n\n%1")
+                            .replace("%1",
+                                     QDir.toNativeSeparators(existing_files)))
                     if len(remaining) == 1:
-                        title = "File could not be dropped"
-                        text = ("The file could not be dropped because a file with "
-                                "the same name already exists in this notebook:\n\n"
-                                + QDir.toNativeSeparators(existing_files))
+                        title = self.tr("File could not be dropped")
+                        text = (self.tr("The file could not be dropped because "
+                                        "a file with the same name already "
+                                        "exists in this notebook:\n\n%1")
+                                .replace("%1",
+                                         QDir.toNativeSeparators(existing_files)))
                     QMessageBox.warning(None, title, text)
                 return False
             else:

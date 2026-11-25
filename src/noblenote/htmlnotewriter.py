@@ -5,7 +5,8 @@
 import re
 from pathlib import Path
 
-from PyQt6.QtCore import QDate, QDateTime, QDir, QSettings, QFileInfo
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QDir, QSettings,
+                          QFileInfo)
 from PyQt6.QtGui import QTextDocument
 
 from . import htmlnotereader
@@ -122,12 +123,13 @@ class HtmlNoteWriter:
                 tag = tag[1:]
             folder = tag
         if not folder:
-            folder = "default"
+            folder = QCoreApplication.translate("HtmlNoteWriter", "default")
 
         title = reader.title()
         title = illegal.sub("", title)
         if not title:
-            title = "untitled note"
+            title = QCoreApplication.translate("HtmlNoteWriter",
+                                               "untitled note")
 
         Path(output_path).mkdir(parents=True, exist_ok=True)
         file_path = str(Path(output_path) / folder / title)

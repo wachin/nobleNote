@@ -38,7 +38,7 @@ class Backup(QObject):
 
         self.progress_receiver1 = ProgressReceiver(self)
         self.progress_dialog1 = QProgressDialog(self.parent_)
-        self.progress_dialog1.setLabelText("Indexing notes...")
+        self.progress_dialog1.setLabelText(self.tr("Indexing notes..."))
 
         self.progress_receiver1.valueChanged.connect(self.progress_dialog1.setValue)
 
@@ -84,7 +84,7 @@ class Backup(QObject):
 
         self.progress_receiver2 = ProgressReceiver(self)
         self.progress_dialog2 = QProgressDialog(self.parent_)
-        self.progress_dialog2.setLabelText("Indexing trash...")
+        self.progress_dialog2.setLabelText(self.tr("Indexing trash..."))
         self.progress_dialog2.setRange(0, len(backup_files))
         self.progress_receiver2.valueChanged.connect(self.progress_dialog2.setValue)
 
@@ -97,7 +97,7 @@ class Backup(QObject):
                 reader.read()
                 title = reader.title()
                 if not title:
-                    title = "deleted note"
+                    title = self.tr("deleted note")
                 data = [title, info.absoluteFilePath(), reader.html()]
                 self.backup_data_hash[info.absoluteFilePath()] = data
                 self.progress_receiver2.post_progress_event()

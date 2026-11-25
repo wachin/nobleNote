@@ -187,9 +187,9 @@ class Note(QMainWindow, Ui_Note):
 
     def show_context_menu(self, point):
         if self.search_bar.isVisible() or self.toolbar.isVisible():
-            self.show_hide_toolbars.setText("Hide Toolbars")
+            self.show_hide_toolbars.setText(self.tr("Hide Toolbars"))
         else:
-            self.show_hide_toolbars.setText("Show Toolbars")
+            self.show_hide_toolbars.setText(self.tr("Show Toolbars"))
 
         menu = self.text_browser.createStandardContextMenu()
         menu.addAction(self.show_hide_toolbars)

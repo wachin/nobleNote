@@ -30,6 +30,13 @@ def main() -> int:
     if qt_translator.load("qt_" + QLocale.system().name(), translations_path):
         app.installTranslator(qt_translator)
 
+    # nobleNote translations (the .qm files shipped in translations/)
+    noblenote_translator = QTranslator()
+    noblenote_path = str(Path(__file__).resolve().parent / "translations")
+    if noblenote_translator.load(QLocale.system(), "noblenote", "_",
+                                 noblenote_path):
+        app.installTranslator(noblenote_translator)
+
     app.setQuitOnLastWindowClosed(False)
     QSettings.setDefaultFormat(QSettings.Format.IniFormat)
 
