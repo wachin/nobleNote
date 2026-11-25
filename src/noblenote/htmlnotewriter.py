@@ -150,7 +150,7 @@ class HtmlNoteWriter:
         writer.set_uuid(reader.uuid())
         writer.write()
 
-        backup_dir = QSettings().value("backup_dir_path", "").toString() or ""
+        backup_dir = str(QSettings().value("backup_dir_path", "") or "")
         if backup_dir:
             Path(backup_dir).mkdir(parents=True, exist_ok=True)
             uuid_str = quid_str(reader.uuid()).strip("{}")

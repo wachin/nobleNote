@@ -152,7 +152,7 @@ class FindFileSystemModel(QSortFilterProxyModel):
         """Read the uuid from each note and copy the note to the backup dir
         with the uuid as its name."""
         import shutil
-        backup_dir = QSettings().value("backup_dir_path", "").toString() or ""
+        backup_dir = str(QSettings().value("backup_dir_path", "") or "")
         for index in indexes:
             file_path = self.filePath(index)
             uuid_ = HtmlNoteReader.uuid(file_path)

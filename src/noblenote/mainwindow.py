@@ -345,8 +345,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         selected = self.folder_view.selectionModel().selectedRows()
         if not selected:
             return
-        new_notebook_name = selected[0].data(
-            Qt.ItemDataRole.DisplayRole).toString()
+        new_notebook_name = str(
+            selected[0].data(Qt.ItemDataRole.DisplayRole) or "")
         recent = self._recent_list()
         for i in range(len(recent)):
             file_name = QFileInfo(recent[i]).fileName()
@@ -507,8 +507,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.folder_view.selectionModel().selectedRows():
             self.folder_view.edit(
                 self.folder_view.selectionModel().selectedRows()[0])
-            self.to_be_renamed_notebook = self.folder_view.selectionModel() \
-                .selectedRows()[0].data(Qt.ItemDataRole.DisplayRole).toString()
+            self.to_be_renamed_notebook = str(
+                self.folder_view.selectionModel().selectedRows()[0].data(
+                    Qt.ItemDataRole.DisplayRole) or "")
 
     def rename_note(self):
         if self.note_view.selectionModel().selectedRows():

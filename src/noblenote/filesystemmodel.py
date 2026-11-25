@@ -21,7 +21,8 @@ class FileSystemModel(QFileSystemModel):
         from PyQt6.QtCore import QSettings
 
         # is drop into "empty space"
-        is_root_folder = self.index(QSettings().value("root_path").toString()) == parent
+        is_root_folder = self.index(
+            str(QSettings().value("root_path", "") or "")) == parent
 
         # row == -1 && column == -1 dropped directly on item or on "empty space"
         if (row == -1 and column == -1) and not is_root_folder:
@@ -32,7 +33,7 @@ class FileSystemModel(QFileSystemModel):
             if self.index(QFileInfo(files[0]).absolutePath()) == parent:
                 return False  # dropped in the same folder they are in
 
-            root_path = QSettings().value("root_path").toString()
+            root_path = str(QSettings().value("root_path", "") or "")
             dirs = QDir(root_path).entryInfoList([QDir.Filter.Dirs,
                                                   QDir.Filter.NoDotAndDotDot],
                                                  QDir.SortFlag.Name)

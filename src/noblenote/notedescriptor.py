@@ -115,7 +115,7 @@ class NoteDescriptor(QObject):
 
     def find_or_recreate(self):
         # search the moved or renamed file by its uuid
-        root_path = QSettings().value("root_path", "").toString() or ""
+        root_path = str(QSettings().value("root_path", "") or "")
         new_file_path = HtmlNoteReader.find_uuid(self.uuid_, root_path)
 
         if not new_file_path:
@@ -150,7 +150,7 @@ class NoteDescriptor(QObject):
                 self.file_path_ = "%s (%d)" % (orig_path, counter)
 
         Path(QFileInfo(file_path).absolutePath()).mkdir(parents=True, exist_ok=True)
-        backup_dir = QSettings().value("backup_dir_path", "").toString() or ""
+        backup_dir = str(QSettings().value("backup_dir_path", "") or "")
         if backup_dir:
             Path(backup_dir).mkdir(parents=True, exist_ok=True)
 
