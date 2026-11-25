@@ -5,7 +5,7 @@
 import threading
 from pathlib import Path
 
-from PyQt6.QtCore import QFileInfo, QObject, QSettings
+from PyQt6.QtCore import QFileInfo, QObject, QSettings, pyqtSignal
 from PyQt6.QtWidgets import QFileDialog, QProgressDialog, QWidget
 
 from .htmlnotewriter import HtmlNoteWriter
@@ -13,8 +13,12 @@ from .progressreceiver import ProgressReceiver
 
 
 class NoteImporter(QObject):
+    # emitted from the worker thread, handled on the gui thread
+    _importFinished = pyqtSignal()
+
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._importFinished.connect(self._finish_import)
         parent_widget = self.parent() if hasattr(self.parent(), "isWidgetType") else None
         if parent_widget is not None and isinstance(parent_widget, QWidget):
             self.parent_widget = parent_widget
@@ -71,9 +75,16 @@ class NoteImporter(QObject):
 
         def wait_for_finish():
             self._thread.join()
-            self.dialog.reject()
-            self.dialog.deleteLater()
-            self.file_dialog.deleteLater()
-            self.file_dialog = None
+            # widgets can only be touched on the gui thread
+            self._importFinished.emit()
 
         threading.Thread(target=wait_for_finish, daemon=True).start()
+
+    def _finish_import(self):
+        if self.dialog is not None:
+            self.dialog.reject()
+            self.dialog.deleteLater()
+            self.dialog = None
+        if self.file_dialog is not None:
+            self.file_dialog.deleteLater()
+            self.file_dialog = None

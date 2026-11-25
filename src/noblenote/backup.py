@@ -117,6 +117,9 @@ class Backup(QObject):
         self.trash = Trash(self.backup_data_hash, self.parent_)
         self.trash.destroyed.connect(self.deleteLater)
         # reparent so that these windows don't linger around after closing
-        self.progress_dialog1.setParent(self.trash)
-        self.progress_dialog2.setParent(self.trash)
+        # (the second dialog does not exist when the trash is empty)
+        if self.progress_dialog1 is not None:
+            self.progress_dialog1.setParent(self.trash)
+        if self.progress_dialog2 is not None:
+            self.progress_dialog2.setParent(self.trash)
         self.trash.show()

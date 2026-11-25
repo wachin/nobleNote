@@ -48,6 +48,9 @@ class TextSearchToolbar(QToolBar):
         self.addWidget(self.case_sensitive_box)
 
         self.close_search.clicked.connect(self.hide)
+        self.close_search.clicked.connect(self._dispose_highlighter)
+        self.close_search.clicked.connect(self.text_edit_.setFocus)
+        self.close_search.clicked.connect(self.search_line_.clear)
         self.search_line_.textChanged.connect(self.typing_timer.start)
         self.find_next.clicked.connect(self.select_next_expression)
         self.find_previous.clicked.connect(self.select_previous_expression)
@@ -89,16 +92,16 @@ class TextSearchToolbar(QToolBar):
         self.highlighter = Highlighter(self.text_edit_.document())
         self.highlighter.expression = string
         self.highlighter.case_sensitive = self.case_sensitive_box.isChecked()
-
-        def cleanup():
-            try:
-                self.highlighter.setParent(None)
-                self.highlighter.deleteLater()
-                self.highlighter = None
-            except RuntimeError:
-                pass
-
-        self.close_search.clicked.connect(cleanup)
-        self.close_search.clicked.connect(self.text_edit_.setFocus)
-        self.close_search.clicked.connect(self.search_line_.clear)
         self.text_edit_.ensureCursorVisible()
+
+    def _dispose_highlighter(self):
+        """Give the document its default highlighting back."""
+        highlighter = self.highlighter
+        self.highlighter = None
+        if highlighter is None:
+            return
+        try:
+            highlighter.setParent(None)
+            highlighter.deleteLater()
+        except RuntimeError:  # already destroyed together with the document
+            pass

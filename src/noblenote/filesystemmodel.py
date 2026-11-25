@@ -34,9 +34,9 @@ class FileSystemModel(QFileSystemModel):
                 return False  # dropped in the same folder they are in
 
             root_path = str(QSettings().value("root_path", "") or "")
-            dirs = QDir(root_path).entryInfoList([QDir.Filter.Dirs,
-                                                  QDir.Filter.NoDotAndDotDot],
-                                                 QDir.SortFlag.Name)
+            dirs = QDir(root_path).entryInfoList(
+                QDir.Filter.Dirs | QDir.Filter.NoDotAndDotDot,
+                QDir.SortFlag.Name)
             # search for the right dir
             parent_path = ""
             for file in dirs:

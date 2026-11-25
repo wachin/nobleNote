@@ -17,14 +17,14 @@ class SystemTrayCreator(QObject):
 
         root_path = str(QSettings().value("root_path", ""))
         dirs = QDir(root_path).entryInfoList(
-            [QDir.Filter.Dirs, QDir.Filter.NoDotAndDotDot,
-             QDir.Filter.NoSymLinks],
+            QDir.Filter.Dirs | QDir.Filter.NoDotAndDotDot
+            | QDir.Filter.NoSymLinks,
             QDir.SortFlag.Name | QDir.SortFlag.IgnoreCase)
 
         for notebook in dirs:
             notebook_menu = menu.addMenu(QDir(notebook.filePath()).dirName())
             entries = QDir(notebook.filePath()).entryInfoList(
-                [QDir.Filter.Files],
+                QDir.Filter.Files,
                 QDir.SortFlag.Name | QDir.SortFlag.IgnoreCase)
             for note_info in entries:
                 action = notebook_menu.addAction(note_info.fileName())

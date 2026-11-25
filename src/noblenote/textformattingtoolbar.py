@@ -246,9 +246,9 @@ class TextFormattingToolbar(QToolBar):
             list_format = QTextListFormat()
             list_format.setStyle(QTextListFormat.Style.ListDisc)
             cursor.createList(list_format)
-        if (current_list is not None
-                and current_list.format().style() == QTextListFormat.Style.ListDisc):
-            self.action_bullet_point.setChecked(True)
-        elif current_list is None or (current_list is not None
-                and current_list.format().style() != QTextListFormat.Style.ListDisc):
-            self.action_bullet_point.setChecked(False)
+        # ask the cursor again: removing the block above can destroy the
+        # QTextList that current_list points to
+        updated_list = self.text_edit_.textCursor().currentList()
+        self.action_bullet_point.setChecked(
+            updated_list is not None
+            and updated_list.format().style() == QTextListFormat.Style.ListDisc)

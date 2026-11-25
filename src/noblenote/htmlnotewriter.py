@@ -141,6 +141,9 @@ class HtmlNoteWriter:
             counter += 1
             file_path = "%s (%d)" % (orig_path, counter)
 
+        # the notebook folder of the imported note may not exist yet
+        Path(file_path).parent.mkdir(parents=True, exist_ok=True)
+
         writer = HtmlNoteWriter(file_path)
         writer.document_ = document
         writer.set_title(title)

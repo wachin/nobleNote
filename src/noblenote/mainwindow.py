@@ -232,15 +232,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.open_notes.append(weakref.ref(note))
         note.destroyed.connect(lambda: self._prune_open_notes())
 
+    @staticmethod
+    def _is_alive(widget) -> bool:
+        """False for a python wrapper whose C++ object has been deleted."""
+        try:
+            widget.objectName()
+        except RuntimeError:
+            return False
+        return True
+
     def _prune_open_notes(self):
-        self.open_notes = [ref for ref in self.open_notes if ref() is not None]
+        self.open_notes = [ref for ref in self.open_notes
+                           if ref() is not None and self._is_alive(ref())]
 
     def _notes(self):
         """Yield the still-alive Note widgets, pruning the dead references."""
         alive = []
         for ref in self.open_notes:
             widget = ref()
-            if widget is not None:
+            if widget is not None and self._is_alive(widget):
                 alive.append(ref)
                 yield widget
         self.open_notes = alive
@@ -324,7 +334,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def settings_accepted(self):
         if not USE_SYSTEM_TRAY:
             return
-        self.icon_creator.disconnect()
+        try:
+            self.icon_creator.noteClicked.disconnect()
+        except TypeError:  # no connection yet
+            pass
         if QSettings().value("open_notes_from_tray", False):
             self.icon_creator.noteClicked.connect(self.open_one_note)
             try:
@@ -389,11 +402,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # close any open note windows (normally not children of this)
             for note in list(self._notes()):
-                note.close()
-                # close() runs the closeEvent which removes the note from the
-                # open notes list, so re-add it here
-                if note.note_descriptor():
-                    Note.add_to_open_note_list(note.note_descriptor().file_path())
+                try:
+                    note.close()
+                    # close() runs the closeEvent which removes the note from
+                    # the open notes list, so re-add it here
+                    if note.note_descriptor():
+                        Note.add_to_open_note_list(
+                            note.note_descriptor().file_path())
+                except RuntimeError:
+                    # the C++ object was already destroyed (WA_DeleteOnClose)
+                    continue
             QApplication.setQuitOnLastWindowClosed(True)
 
         super().closeEvent(event)
@@ -602,7 +620,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             menu.addSeparator()
             menu.addAction(self.action_Paste)
         if self.note_view.indexAt(pos).isValid():
-            if self.note_view.selectionModel().selectedRows().count() == 1:
+            if len(self.note_view.selectionModel().selectedRows()) == 1:
                 menu.addAction(self.actionRename_note)
             else:
                 open_all = QAction(self.tr("&Open notes"), menu)

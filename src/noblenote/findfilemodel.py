@@ -93,9 +93,14 @@ class FindFileModel(QStandardItemModel):
         if item is None:
             return False
         file_path = item.data(USER_ROLE_PATH)
-        b = Path(file_path).unlink(missing_ok=True)
-        if b:
+        try:
+            Path(file_path).unlink()
+            removed = True
+        except OSError:
+            removed = False
+        if removed:
             self.removeRow(index.row(), index.parent())
+        return removed
     def findInFiles(self, fileName: str, content: str, path: str, waitCursor: bool):
         """Search recursively.  May be called multiple times while the user
         is typing a search word."""
