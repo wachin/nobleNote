@@ -28,6 +28,10 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+# spell checking in the note editor (needs hunspell dictionaries on the system)
+spell = ["hunspell>=0.5"]
+
 [project.scripts]
 noblenote = "noblenote.main:main"
 
@@ -51,5 +55,4 @@ noblenote = [
     "icons/dark/*.svg",
     "translations/*.ts",
     "translations/*.qm",
-    "ui/*.ui",
 ]

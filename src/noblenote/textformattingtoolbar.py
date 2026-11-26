@@ -2,22 +2,31 @@
 # Licensed under the MIT license.
 """A toolbar with buttons to format the text of a QTextEdit."""
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import (QAction, QBrush, QColor, QFont, QFontDatabase,
-                         QFontInfo, QIcon, QKeySequence, QPixmap, QTextCharFormat,
+from PyQt6.QtCore import QSize, Qt, pyqtSignal
+from PyQt6.QtGui import (QAction, QBrush, QColor, QFont,
+                         QIcon, QKeySequence, QPixmap, QTextCharFormat,
                          QTextCursor, QTextListFormat)
-from PyQt6.QtWidgets import (QColorDialog, QComboBox, QFontComboBox,
+from PyQt6.QtWidgets import (QColorDialog,
                              QInputDialog, QLineEdit, QToolBar, QTextEdit)
 
 from .resources import icon, palette_watcher
 
 
 class TextFormattingToolbar(QToolBar):
+    preferencesRequested = pyqtSignal()
+
     def __init__(self, text_edit: QTextEdit, parent=None):
         super().__init__(parent)
         self.text_edit_ = text_edit
         self.setWindowTitle(self.tr("Format actions"))
         self.setObjectName("Formattoolbar")
+        # compact, Adobe-like: small icons packed close together
+        self.setMovable(False)
+        self.setFloatable(False)
+        self.setIconSize(QSize(16, 16))
+        self.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
+        self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().setSpacing(1)
 
         # Bold
         self.action_text_bold = QAction(icon("bold"), self.tr("&Bold"), self)
@@ -92,21 +101,14 @@ class TextFormattingToolbar(QToolBar):
         self.action_text_bcolor.triggered.connect(self.marked_text)
         self.addAction(self.action_text_bcolor)
 
-        # Font selection
-        self.font_combo_box = QFontComboBox(self)
-        self.font_combo_box.setFocusPolicy(Qt.FocusPolicy.TabFocus)
-        self.addWidget(self.font_combo_box)
-        self.font_combo_box.currentTextChanged.connect(self.font_of_text)
+        # Program settings, where the note editor font family and size are
+        # chosen (the font selectors do not fit in the title bar)
+        self.action_preferences = QAction(icon("preferences"),
+                                          self.tr("&Preferences"), self)
+        self.action_preferences.triggered.connect(self.preferencesRequested)
+        self.addAction(self.action_preferences)
 
-        # Font size selection
-        self.font_size_combo_box = QComboBox(self)
-        self.font_size_combo_box.setFocusPolicy(Qt.FocusPolicy.TabFocus)
-        for size in QFontDatabase.standardSizes():
-            self.font_size_combo_box.addItem(str(size))
-        self.addWidget(self.font_size_combo_box)
-        self.font_size_combo_box.currentTextChanged.connect(self.point_size_of_text)
-
-        self.text_edit_.currentCharFormatChanged.connect(self.get_font_and_point_size_of_text)
+        self.text_edit_.currentCharFormatChanged.connect(self.update_format_actions)
         self.text_edit_.cursorPositionChanged.connect(self.update_bullet_point_toolbar_button)
 
         watcher = palette_watcher()
@@ -130,6 +132,7 @@ class TextFormattingToolbar(QToolBar):
         self.action_insert_hyperlink.setIcon(icon("hyperlink"))
         self.action_clear_formatting.setIcon(icon("clearFormatting"))
         self.action_bullet_point.setIcon(icon("bulletpoints"))
+        self.action_preferences.setIcon(icon("preferences"))
 
         palette = self.text_edit_.palette()
         char_format = self.text_edit_.currentCharFormat()
@@ -160,12 +163,8 @@ class TextFormattingToolbar(QToolBar):
         cursor.setCharFormat(QTextCharFormat())
         self.text_edit_.setCurrentCharFormat(QTextCharFormat())
 
-    def get_font_and_point_size_of_text(self, fmt: QTextCharFormat):
+    def update_format_actions(self, fmt: QTextCharFormat):
         f = fmt.font()
-        self.font_combo_box.setCurrentIndex(
-            self.font_combo_box.findText(QFontInfo(f).family()))
-        self.font_size_combo_box.setCurrentIndex(
-            self.font_size_combo_box.findText(str(f.pointSize())))
         self.action_text_bold.setChecked(f.bold())
         self.action_text_italic.setChecked(f.italic())
         self.action_text_underline.setChecked(f.underline())
@@ -186,6 +185,7 @@ class TextFormattingToolbar(QToolBar):
     def update_bullet_point_toolbar_button(self):
         cursor = self.text_edit_.textCursor()
         current_list = cursor.currentList()
+
     def bold_text(self):
         fmt = QTextCharFormat()
         fmt.setFontWeight(QFont.Weight.Bold
@@ -243,25 +243,6 @@ class TextFormattingToolbar(QToolBar):
             cursor.insertHtml('<a href="%s">%s</a>' % (link, selected_text))
         cursor.insertText(" ", fmt)
 
-    def font_of_text(self, f: str):
-        fmt = QTextCharFormat()
-        fmt.setFontFamilies([f])
-        self.merge_format_on_word_or_selection(fmt)
-
-    def point_size_of_text(self, p: str):
-        try:
-            point_size = float(p)
-        except ValueError:
-            return
-        if point_size > 0:
-            fmt = QTextCharFormat()
-            fmt.setFontPointSize(point_size)
-            self.merge_format_on_word_or_selection(fmt)
-
-    def set_font(self, font: QFont):
-        self.font_combo_box.setCurrentFont(font)
-        self.font_size_combo_box.setCurrentIndex(
-            self.font_size_combo_box.findText(str(font.pointSize())))
     def striked_out_text(self):
         fmt = QTextCharFormat()
         fmt.setFontStrikeOut(self.action_text_strike_out.isChecked())

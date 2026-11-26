@@ -2,7 +2,8 @@
 # Licensed under the MIT license.
 """Resource helper: loads the svg icons used by nobleNote.
 
-In the C++ version the icons are compiled into the binary via nobleNote.qrc.
+In the C++ version the icons were compiled into the binary through a Qt
+resource file.
 In this Python port we ship the very same svg files as package data
 (see the icons/ directory next to this module).
 
@@ -37,7 +38,7 @@ ICON_DIR = Path(__file__).resolve().parent / "icons"
 # Icons redrawn for dark color schemes, picked by file name when one exists.
 DARK_ICON_DIR = ICON_DIR / "dark"
 
-# aliases as defined in nobleNote.qrc
+# aliases used by the original Qt resource file
 _ALIASES = {
     "nobleNote": "noblenote.svg",
     "closeB": "fileclose.svg",

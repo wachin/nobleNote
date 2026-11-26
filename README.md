@@ -7,9 +7,10 @@ Notes are stored in the html format for maximum compatibility with other applica
 It is compatible to the [nobleNoteAndroid](https://github.com/taiko000/nobleNoteAndroid) app for Android.
 
 > **This fork**: nobleNote has been ported from C++/Qt to Python/PyQt6.
-> The port lives in `src/noblenote/` and is what you should run; the original C++
-> sources are still in `src/` for reference and can be dropped (see
-> [PYQT6_PORT_STATUS.md](PYQT6_PORT_STATUS.md) for the state of the migration).
+> The port lives in `src/noblenote/` and is the application to run. The original
+> C++ sources and the `.ui` forms were removed from the working tree; they are
+> still available at the tag `v1.5.0-cpp`. See
+> [PYQT6_PORT_STATUS.md](PYQT6_PORT_STATUS.md) for the state of the migration.
 
 ## Supported Platforms
 
@@ -165,8 +166,9 @@ to change it.
 To refresh them after changing strings in the code:
 
 ```bash
-# extract the strings from the Python modules and the .ui forms
-pylupdate6 --no-obsolete src/noblenote --ts src/noblenote/translations/noblenote_es.ts
+# extract the strings from the Python modules (the .ui forms no longer exist)
+pylupdate6 --no-obsolete src/noblenote/*.py src/noblenote/ui/*.py \
+           --ts src/noblenote/translations/noblenote_es.ts
 
 # compile the .ts into the .qm that the application loads
 lrelease src/noblenote/translations/noblenote_es.ts \
@@ -174,46 +176,16 @@ lrelease src/noblenote/translations/noblenote_es.ts \
 ```
 
 `pylupdate6` keeps the translations that already exist (it matches them by context
-and source text), so it is safe to run it over an already translated file.
+and source text), so it is safe to run it over an already translated file. The form
+strings come from the `translate(...)` calls in `ui/ui_*.py`; the original `.ui`
+files were removed from the tree and are not needed anymore. Note that `pylupdate6`
+resolves a module alias named `translate` but not one named `_translate`.
 
 ### State of the migration
 
 Coverage, known gaps and what still needs a graphical session to be verified are
 tracked in [PYQT6_PORT_STATUS.md](PYQT6_PORT_STATUS.md). The last commit that still
 carries the C++ sources is tagged `v1.5.0-cpp`.
-
-## Installation (C++ version, still in `src/`)
-
-Windows: Binary releases can be found on the releases page of this github repository
-
-Debian based Linux distributions (Ubuntu):
-
-`sudo apt install noblenote`
-
-Building from source requires at least Qt 6.0 or newer.
-
-It can also be build using the QtCreator IDE.
-
-## Building From CLI
-
-Dependencies: build-essential, qt6-base-dev, qt6-tools-dev-tools
-
-To compile from source, open a terminal and change into the nobleNote source folder.
-To install type:
-
-`qmake6`
-
-`sudo make install distclean`
-
-To uninstall type:
-
-`qmake6`     (if the Makefile has been removed)
-
-`sudo make deinstall`
-
-(Note that ~/.config/nobleNote.conf and
- the notes at their location won't be removed.
-Backups are in their default data location.)
 
 ## License
 

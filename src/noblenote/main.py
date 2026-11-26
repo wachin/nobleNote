@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # nobleNote, a note taking application - PyQt6 port
 # Licensed under the MIT license.
-"""Equivalent of src/main.cpp - application entry point."""
+"""Application entry point."""
 
 import os
 import sys

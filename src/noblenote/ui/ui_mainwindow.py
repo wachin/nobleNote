@@ -9,12 +9,12 @@ from PyQt6.QtWidgets import (QGridLayout, QMainWindow, QMenu, QMenuBar,
 from ..resources import icon
 from PyQt6.QtCore import QCoreApplication
 
-_translate = QCoreApplication.translate
+translate = QCoreApplication.translate
 
 
 class Ui_MainWindow:
     def setupUi(self, main_window: QMainWindow):
-        main_window.setWindowTitle(_translate("MainWindow", "nobleNote"))
+        main_window.setWindowTitle(translate("MainWindow", "nobleNote"))
         main_window.setWindowIcon(icon("nobleNote"))
         main_window.setToolButtonStyle(__import__("PyQt6.QtCore", fromlist=["Qt"])
                                        .Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
@@ -31,17 +31,17 @@ class Ui_MainWindow:
         # ------------------------------------------------ menu bar
         self.menubar = QMenuBar(main_window)
         self.menuFile = QMenu(self.menubar)
-        self.menuFile.setTitle(_translate("MainWindow", "&File"))
+        self.menuFile.setTitle(translate("MainWindow", "&File"))
         self.menu_Open_recent = QMenu(self.menuFile)
-        self.menu_Open_recent.setTitle(_translate("MainWindow", "Open recent"))
+        self.menu_Open_recent.setTitle(translate("MainWindow", "Open recent"))
         self.menu_Edit = QMenu(self.menubar)
-        self.menu_Edit.setTitle(_translate("MainWindow", "&Edit"))
+        self.menu_Edit.setTitle(translate("MainWindow", "&Edit"))
         self.menu_View = QMenu(self.menubar)
-        self.menu_View.setTitle(_translate("MainWindow", "&View"))
+        self.menu_View.setTitle(translate("MainWindow", "&View"))
         self.menu_Settings = QMenu(self.menubar)
-        self.menu_Settings.setTitle(_translate("MainWindow", "&Settings"))
+        self.menu_Settings.setTitle(translate("MainWindow", "&Settings"))
         self.menu_Help = QMenu(self.menubar)
-        self.menu_Help.setTitle(_translate("MainWindow", "&Help"))
+        self.menu_Help.setTitle(translate("MainWindow", "&Help"))
 
         self.menuFile.addAction(self.menu_Open_recent.menuAction())
         self.menuFile.addSeparator()
@@ -84,55 +84,55 @@ class Ui_MainWindow:
     def _make_actions(self, main_window: QMainWindow):
         # actions must exist before setupUi() adds them to the menus
         self.actionQuitFileMenu = QAction(main_window)
-        self.actionQuitFileMenu.setText(_translate("MainWindow", "&Quit"))
-        self.actionQuitFileMenu.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+Q")))
+        self.actionQuitFileMenu.setText(translate("MainWindow", "&Quit"))
+        self.actionQuitFileMenu.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+Q")))
 
         self.actionImport = QAction(main_window)
-        self.actionImport.setText(_translate("MainWindow", "&Import"))
+        self.actionImport.setText(translate("MainWindow", "&Import"))
 
-        self.actionConfigure = QAction(icon("preferences"), _translate("MainWindow", "&Configure..."), main_window)
+        self.actionConfigure = QAction(icon("preferences"), translate("MainWindow", "&Configure..."), main_window)
         self.actionConfigure.setShortcut(QKeySequence("Ctrl+."))
 
-        self.actionTrash = QAction(icon("trash"), _translate("MainWindow", "&Trash"), main_window)
-        self.actionTrash.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+Shift+T")))
+        self.actionTrash = QAction(icon("trash"), translate("MainWindow", "&Trash"), main_window)
+        self.actionTrash.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+Shift+T")))
 
-        self.actionAbout = QAction(_translate("MainWindow", "&About"), main_window)
+        self.actionAbout = QAction(translate("MainWindow", "&About"), main_window)
 
         self.actionShowToolbar = QAction(main_window)
-        self.actionShowToolbar.setText(_translate("MainWindow", "&Show toolbar"))
+        self.actionShowToolbar.setText(translate("MainWindow", "&Show toolbar"))
         self.actionShowToolbar.setCheckable(True)
 
         self.actionHistory = QAction(main_window)
-        self.actionHistory.setText(_translate("MainWindow", "&History"))
-        self.actionHistory.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+Shift+H")))
+        self.actionHistory.setText(translate("MainWindow", "&History"))
+        self.actionHistory.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+Shift+H")))
         self.actionHistory.setVisible(False)
 
-        self.actionNew_folder = QAction(icon("newFolder"), _translate("MainWindow", "&New notebook"), main_window)
-        self.actionNew_folder.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+N")))
+        self.actionNew_folder = QAction(icon("newFolder"), translate("MainWindow", "&New notebook"), main_window)
+        self.actionNew_folder.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+N")))
 
-        self.actionRename_folder = QAction(icon("renameFolder"), _translate("MainWindow", "&Rename notebook"), main_window)
-        self.actionRename_folder.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+R")))
+        self.actionRename_folder = QAction(icon("renameFolder"), translate("MainWindow", "&Rename notebook"), main_window)
+        self.actionRename_folder.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+R")))
 
-        self.actionDelete_folder = QAction(icon("deleteFolder"), _translate("MainWindow", "&Delete notebook"), main_window)
-        self.actionDelete_folder.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+D")))
+        self.actionDelete_folder = QAction(icon("deleteFolder"), translate("MainWindow", "&Delete notebook"), main_window)
+        self.actionDelete_folder.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+D")))
 
-        self.actionNew_note = QAction(icon("newNote"), _translate("MainWindow", "&New note"), main_window)
-        self.actionNew_note.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+Shift+N")))
+        self.actionNew_note = QAction(icon("newNote"), translate("MainWindow", "&New note"), main_window)
+        self.actionNew_note.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+Shift+N")))
 
-        self.actionRename_note = QAction(icon("renameNote"), _translate("MainWindow", "&Rename note"), main_window)
+        self.actionRename_note = QAction(icon("renameNote"), translate("MainWindow", "&Rename note"), main_window)
         self.actionRename_note.setEnabled(False)
-        self.actionRename_note.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+Shift+R")))
-        self.actionRename_note.setText(_translate("MainWindow", "&Rename note"))
+        self.actionRename_note.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+Shift+R")))
+        self.actionRename_note.setText(translate("MainWindow", "&Rename note"))
 
-        self.actionDelete_note = QAction(icon("deleteNote"), _translate("MainWindow", "&Delete note"), main_window)
+        self.actionDelete_note = QAction(icon("deleteNote"), translate("MainWindow", "&Delete note"), main_window)
         self.actionDelete_note.setEnabled(False)
-        self.actionDelete_note.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+Shift+D")))
+        self.actionDelete_note.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+Shift+D")))
 
-        self.action_Cut = QAction(_translate("MainWindow", "&Cut"), main_window)
-        self.action_Cut.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+X")))
+        self.action_Cut = QAction(translate("MainWindow", "&Cut"), main_window)
+        self.action_Cut.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+X")))
 
-        self.action_Paste = QAction(_translate("MainWindow", "&Paste"), main_window)
+        self.action_Paste = QAction(translate("MainWindow", "&Paste"), main_window)
         self.action_Paste.setEnabled(False)
-        self.action_Paste.setShortcut(QKeySequence(_translate("MainWindow", "Ctrl+V")))
+        self.action_Paste.setShortcut(QKeySequence(translate("MainWindow", "Ctrl+V")))
 
-        self.actionA = QAction(_translate("MainWindow", "a"), main_window)
+        self.actionA = QAction(translate("MainWindow", "a"), main_window)

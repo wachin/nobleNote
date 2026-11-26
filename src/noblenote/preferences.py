@@ -4,9 +4,12 @@
 
 from PyQt6.QtCore import QDir, QFileInfo, QSettings, QSize, pyqtSignal
 from PyQt6.QtGui import QFont, QFontDatabase
-from PyQt6.QtWidgets import QDialog, QFileDialog, QMessageBox
+from PyQt6.QtWidgets import (QApplication, QDialog, QFileDialog,
+                             QMessageBox)
 
 from .note import Note
+from .spellchecker import (available_dictionaries, default_language,
+                           spell_checking_available)
 from .ui.ui_preferences import Ui_Preferences
 
 
@@ -26,6 +29,18 @@ class Preferences(QDialog, Ui_Preferences):
 
         for size in QFontDatabase.standardSizes():
             self.fontSizeComboBox.addItem(str(size))
+
+        available = spell_checking_available()
+        self.spell_languages = available_dictionaries() if available else {}
+        for language in self.spell_languages:
+            self.spellLanguageComboBox.addItem(language, language)
+        self.spellCheckBox.setChecked(
+            bool(self.settings.value("spell_check_enabled", True)))
+        if not available:
+            self.spellLanguageComboBox.addItem(
+                self.tr("Hunspell is not available"))
+            self.spellLanguageComboBox.setEnabled(False)
+            self.spellCheckBox.setEnabled(False)
 
         self.openNotesFromTray.setChecked(
             bool(self.settings.value("open_notes_from_tray", False)))
@@ -72,6 +87,13 @@ class Preferences(QDialog, Ui_Preferences):
             self.fontSizeComboBox.findText(
                 str(int(self.settings.value("note_editor_font_size", 10)))))
         self.recentSpin.setValue(int(self.settings.value("Number_of_recent_Notes", 5)))
+        language = str(self.settings.value("spell_check_language", "") or "")
+        index = self.spellLanguageComboBox.findData(language)
+        if index < 0:
+            index = self.spellLanguageComboBox.findData(
+                default_language(self.spell_languages))
+        if index >= 0:
+            self.spellLanguageComboBox.setCurrentIndex(index)
         super().showEvent(event)
 
     def save_settings(self):
@@ -121,6 +143,17 @@ class Preferences(QDialog, Ui_Preferences):
                                self.fontComboBox.font().pointSize())
         self.settings.setValue("Number_of_recent_Notes",
                                self.recentSpin.value())
+        self.settings.setValue("spell_check_enabled",
+                               self.spellCheckBox.isChecked())
+        language = self.spellLanguageComboBox.currentData()
+        if language:
+            self.settings.setValue("spell_check_language", language)
+
+        # the open notes underline with the new settings right away
+        for widget in QApplication.topLevelWidgets():
+            apply_settings = getattr(widget, "apply_spell_check_settings", None)
+            if callable(apply_settings):
+                apply_settings()
 
         self.recentCountChanged.emit()
         self.accept()

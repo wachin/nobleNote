@@ -2,3 +2,5 @@ PyQt6>=6.5
 PyQt6-Qt6>=6.5
 PyQt6-sip>=13.6
 PyQt6-QtSvg>=6.5
+# optional, enables spell checking: hunspell (Debian/Ubuntu: python3-hunspell)
+# and the dictionaries of the wanted languages (hunspell-es, hunspell-en-us, ...)

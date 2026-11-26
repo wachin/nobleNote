@@ -7,13 +7,13 @@ from PyQt6.QtWidgets import (QAbstractItemView, QDialog, QDialogButtonBox,
                              QFrame, QGridLayout, QLabel, QPushButton,
                              QTextEdit, QTreeWidget)
 
-_translate = QCoreApplication.translate
+translate = QCoreApplication.translate
 
 
 class Ui_Trash:
     def setupUi(self, trash_dialog: QDialog):
         trash_dialog.resize(468, 355)
-        trash_dialog.setWindowTitle(_translate("Trash", "Trash"))
+        trash_dialog.setWindowTitle(translate("Trash", "Trash"))
 
         self.gridLayout = QGridLayout(trash_dialog)
         self.gridLayout.setObjectName("gridLayout")
@@ -25,12 +25,12 @@ class Ui_Trash:
         self.gridLayout.addWidget(self.buttonBox, 1, 2)
 
         self.restoreButton = QPushButton(trash_dialog)
-        self.restoreButton.setText(_translate("Trash", "&Restore"))
+        self.restoreButton.setText(translate("Trash", "&Restore"))
         self.restoreButton.setObjectName("restoreButton")
         self.gridLayout.addWidget(self.restoreButton, 1, 0)
 
         self.deleteButton = QPushButton(trash_dialog)
-        self.deleteButton.setText(_translate("Trash", "&Delete"))
+        self.deleteButton.setText(translate("Trash", "&Delete"))
         self.deleteButton.setObjectName("deleteButton")
         self.gridLayout.addWidget(self.deleteButton, 1, 1)
 
@@ -46,13 +46,13 @@ class Ui_Trash:
         self.gridLayout_2.addWidget(self.textEdit, 1, 1)
 
         self.label = QLabel(self.frame)
-        self.label.setText(_translate("Trash", "Select the notes you want to delete or restore"))
+        self.label.setText(translate("Trash", "Select the notes you want to delete or restore"))
         self.label.setWordWrap(True)
         self.label.setObjectName("label")
         self.gridLayout_2.addWidget(self.label, 0, 0)
 
         self.label_2 = QLabel(self.frame)
-        self.label_2.setText(_translate("Trash", "Preview"))
+        self.label_2.setText(translate("Trash", "Preview"))
         self.label_2.setObjectName("label_2")
         self.gridLayout_2.addWidget(self.label_2, 0, 1)
 
@@ -63,7 +63,7 @@ class Ui_Trash:
         self.treeWidget.setVerticalScrollMode(
             QAbstractItemView.ScrollMode.ScrollPerPixel)
         self.treeWidget.setSortingEnabled(True)
-        self.treeWidget.setHeaderLabels([_translate("Trash", "Deleted notes")])
+        self.treeWidget.setHeaderLabels([translate("Trash", "Deleted notes")])
         self.treeWidget.setObjectName("treeWidget")
         self.gridLayout_2.addWidget(self.treeWidget, 1, 0)
 

@@ -4,14 +4,15 @@ Estado del port de C++/Qt6 a Python/PyQt6.
 
 ## Estado actual: COMPLETO (a nivel de codigo)
 
-- **26/26** archivos `.cpp` tienen equivalente en `src/noblenote/` (32 modulos, todos importan).
+- **26/26** archivos `.cpp` tienen equivalente en `src/noblenote/` (34 modulos, todos importan).
 - **164 metodos** del C++: 149 con el mismo nombre en snake_case, 15 renombrados o codigo muerto (ver abajo).
 - **5/5** formularios `.ui` portados a `src/noblenote/ui/ui_*.py`.
 - **Traducciones funcionando**: 11 idiomas, `.qm` versionados y traductor cargado al arrancar.
-- **Iconos reales** (20 SVG + `.ico`), **arrastrar y soltar** con `MoveAction`, **19 claves de `QSettings`** identicas al C++.
+- **Iconos reales** (20 SVG + 11 variantes oscuras + `.ico`), **arrastrar y soltar** con `MoveAction`, **19 claves de `QSettings`** identicas al C++ (mas 3 nuevas de ortografia).
+- **Barra de titulo propia** (sin marco nativo) con la barra de formato dentro, y **correccion ortografica opcional con Hunspell**.
 
-Pendiente: validar en una sesion grafica real y borrar el codigo C++ (ver "Pendiente").
-El ultimo commit con el C++ presente esta marcado con el tag **`v1.5.0-cpp`**.
+Pendiente: validar en una sesion grafica real. El codigo C++ y los `.ui` originales ya
+se borraron de `src/`; siguen disponibles en el tag **`v1.5.0-cpp`**.
 
 ## Como ejecutar
 
@@ -32,7 +33,7 @@ Layout `src`, asi que `PYTHONPATH=src` (o la instalacion) es obligatorio: el paq
 ## Estructura del port
 
 ```
-src/noblenote/                 # 32 modulos
+src/noblenote/                 # 34 modulos
 ├── __init__.py                # marca de paquete
 ├── __main__.py                # python3 -m noblenote
 ├── main.py                    # QApplication, QSettings portables, traductores
@@ -63,18 +64,20 @@ src/noblenote/                 # 32 modulos
 ├── datetimeutil.py            # fechas y UUID
 ├── xorcipher.py               # cifrado XOR (sin uso, igual que en el C++)
 ├── abstractnotereader.py      # clase base
-├── resources.py               # iconos SVG + alias de nobleNote.qrc
+├── resources.py               # iconos SVG + alias del resource original
+├── titlebar.py                # barra de titulo propia (modulo nuevo)
+├── spellchecker.py            # correccion ortografica con Hunspell (nuevo)
 ├── version.py                 # version.txt
 ├── version.txt                # 1.5.0
 ├── requirements.txt           # dependencias (tambien en pyproject.toml)
-├── icons/                     # 20 SVG + noblenote.ico
+├── icons/                     # 20 SVG + dark/ (11 SVG) + noblenote.ico
 ├── translations/              # 11 .ts + 11 .qm
-└── ui/                        # ui_*.py + los 5 .ui de origen
+└── ui/                        # ui_*.py
 ```
 
 En la raiz: `pyproject.toml` (src-layout, `noblenote` como entry point), `noblenote.desktop`,
-`README.md`, `NEWS`, `COPYING`, `screenshot/` y, de momento, el C++ original (`src/*.cpp|h`,
-`nobleNote.pro`, `nobleNote.qrc`, `icon.rc`).
+`README.md`, `CHANGELOG.md`, `NEWS`, `COPYING` y `screenshot/`. El C++ original y los `.ui`
+ya no estan: viven en el tag `v1.5.0-cpp`.
 
 ## Metodos del C++ renombrados o sin equivalente
 
@@ -97,12 +100,14 @@ Ninguno es una funcionalidad perdida:
 
 ## Traducciones (i18n)
 
-Los `.ts` se generan desde el codigo Python y desde los `.ui`, y los `.qm` se versionan
-(por eso la excepcion `!src/noblenote/translations/*.qm` en `.gitignore`).
+Los `.ts` se generan **solo desde el codigo Python** y los `.qm` se versionan
+(por eso la excepcion `!src/noblenote/translations/*.qm` en `.gitignore`). Los `.ui`
+originales ya no participan en la extraccion: se pueden borrar sin perder traducciones.
 
 ```bash
 # extraer/actualizar (conserva las traducciones ya existentes por contexto + texto)
-pylupdate6 --no-obsolete src/noblenote --ts src/noblenote/translations/noblenote_es.ts
+pylupdate6 --no-obsolete src/noblenote/*.py src/noblenote/ui/*.py \
+  --ts src/noblenote/translations/noblenote_es.ts
 
 # compilar
 lrelease src/noblenote/translations/noblenote_es.ts -qm src/noblenote/translations/noblenote_es.qm
@@ -112,19 +117,24 @@ lrelease src/noblenote/translations/noblenote_es.ts -qm src/noblenote/translatio
 
 | idioma | traducidas |
 |--------|-----------|
-| es | 141/141 |
-| fr | 133/141 |
-| cs, de, de_DE, ms, pl, ru, uk | 116-120/141 |
-| ast | 103/141 |
-| gl | 100/141 |
+| es | 148/148 |
+| cs, de, de_DE, pl, ru | 137/148 |
+| ms, uk | 136/148 |
+| gl | 134/148 |
+| fr | 133/148 |
+| ast | 128/148 |
 
 Los huecos restantes son textos que nunca estuvieron traducidos en el `.ts` original (no fallos
-del cableado). Los formularios traducen via `_translate()` en `ui/ui_*.py`, igual que hace pyuic6.
+del cableado). Los formularios usan `translate = QCoreApplication.translate` y llamadas
+`translate(...)` en `ui/ui_*.py`; `pylupdate6` resuelve ese alias, pero **no** un alias con otro
+nombre (por ejemplo `_translate`), asi que las cadenas nuevas deben escribirse como
+`translate(...)` o `self.tr(...)` para que se extraigan al regenerar los `.ts`.
 
 ## Verificado
 
 - `python3 -m compileall src/noblenote` sin errores.
-- Los 32 modulos importan; `MainWindow`, `Preferences`, `Trash` y `Welcome` se instancian.
+- Los 34 modulos importan; `MainWindow`, `Preferences`, `Trash` y `Welcome` se instancian
+  sin el C++ ni los `.ui` en el arbol de trabajo.
 - Smoke test de 7 pasos (abajo) completo.
 - Escritura/lectura de nota HTML con UUID y `find_uuid`.
 - Traduccion en ejecucion con `es` y `fr` (textos de menu, barras, Preferencias, Papelera y Bienvenida).
@@ -140,8 +150,9 @@ del cableado). Los formularios traducen via `_translate()` en `ui/ui_*.py`, igua
 ## Pendiente
 
 - [ ] Validar lo anterior en una sesion grafica real.
-- [ ] Borrar el C++ (`src/*.cpp|h`, `nobleNote.pro`, `nobleNote.qrc`, `icon.rc`) y `xorcipher.py`.
-      Recuperable con `git checkout v1.5.0-cpp -- src/`.
+- [x] Borrar el C++ (`src/*.cpp|h`, `nobleNote.pro`, `nobleNote.qrc`, `icon.rc`) y los 5 `.ui`
+      de `src/noblenote/ui/`. Recuperable con `git checkout v1.5.0-cpp -- src/`.
+- [ ] Valorar borrar `xorcipher.py` (sin uso, igual que en el C++).
 - [ ] Ajustar `noblenote.desktop` (`Exec=noblenote`, `Icon=noblenote` -> instalar `noblenote.svg`
       en `/usr/share/pixmaps/` o en el tema hicolor).
 - [ ] Rellenar los huecos de ast/gl/cs/de/ms/pl/ru/uk si se quieren completar.
@@ -261,6 +272,12 @@ En offscreen aparecen avisos inofensivos (`QFileSystemWatcher::addPaths: list is
 | `nobleNote.qrc` | `src/noblenote/resources.py` + `icons/` |
 | `nobleNote.pro` (`TRANSLATIONS`) | `pylupdate6` + `lrelease` (ver arriba) |
 | `version.txt` | `src/noblenote/version.txt` (leido por `version.py`) |
+
+Las rutas de la columna C++ corresponden al tag `v1.5.0-cpp`.
+
+Dos modulos no tienen equivalente en el C++: `titlebar.py` (barra de titulo propia, con la
+barra de formato dentro y agarres para redimensionar) y `spellchecker.py` (correccion
+ortografica opcional con Hunspell, con las palabras propias en `QSettings`).
 
 ## Diferencias de API Qt5 -> Qt6 aplicadas
 

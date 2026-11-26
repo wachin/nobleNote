@@ -7,12 +7,12 @@ from PyQt6.QtWidgets import QGridLayout, QMainWindow, QWidget
 
 from ..resources import icon
 
-_translate = QCoreApplication.translate
+translate = QCoreApplication.translate
 
 
 class Ui_Note:
     def setupUi(self, note_window: QMainWindow):
-        note_window.setWindowTitle(_translate("Note", "Note-Editor"))
+        note_window.setWindowTitle(translate("Note", "Note-Editor"))
         note_window.setWindowIcon(icon("nobleNote"))
 
         self.centralwidget = QWidget(note_window)

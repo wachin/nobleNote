@@ -4,13 +4,15 @@
 
 from PyQt6.QtCore import QByteArray, QSettings, QSize, Qt
 from PyQt6.QtGui import QAction, QFont, QKeySequence
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QApplication, QDialog, QMainWindow
 
 from .notedescriptor import NoteDescriptor
+from .spellchecker import SpellCheck
 from .textbrowser import TextBrowser
 from .textdocument import TextDocument
 from .textformattingtoolbar import TextFormattingToolbar
 from .textsearchtoolbar import TextSearchToolbar
+from .titlebar import NoteTitleBar, WindowResizeGrips
 from .ui.ui_note import Ui_Note
 
 
@@ -19,11 +21,14 @@ class Note(QMainWindow, Ui_Note):
         super().__init__(parent)
         self.setupUi(self)
         self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
+        # no native title bar: the formatting toolbar lives in ours
+        self.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
 
         self.show_after_loading_ = False
         self.text_browser = TextBrowser(self)
         self.text_document = TextDocument(self)
         self.text_browser.setDocument(self.text_document)
+        self.spell_check = SpellCheck(self.text_browser, self)
         self.text_browser.ensureCursorVisible()
         # tab size 4 (android compatibility)
         self.text_browser.setTabStopDistance(
@@ -40,14 +45,16 @@ class Note(QMainWindow, Ui_Note):
 
         self.toolbar = TextFormattingToolbar(self.text_browser, self)
         self.toolbar.setFocusPolicy(Qt.FocusPolicy.TabFocus)
-        self.addToolBar(self.toolbar)
-        self.addToolBarBreak(Qt.ToolBarArea.TopToolBarArea)
+        self.toolbar.preferencesRequested.connect(self.show_preferences)
+        self._pref_connected_ = False
 
-        font = QFont()
-        font.setFamily(str(QSettings().value("note_editor_font", "DejaVu Sans")))
-        font.setPointSize(int(QSettings().value("note_editor_font_size", 10)))
-        self.text_document.setDefaultFont(font)
-        self.toolbar.set_font(font)
+        self.title_bar = NoteTitleBar(self, self.toolbar, self)
+        self.setMenuWidget(self.title_bar)
+        self.windowTitleChanged.connect(self.title_bar.set_title)
+        self.title_bar.set_title(self.windowTitle())
+        self.resize_grips = WindowResizeGrips(self)
+
+        self.apply_default_font()
 
         # must be constructed after the TextDocument
         self.note_descriptor_ = NoteDescriptor(file_path, self.text_browser,
@@ -79,6 +86,44 @@ class Note(QMainWindow, Ui_Note):
 
     def highlight_text(self, the_str: str):
         self.search_bar.highlight_text(the_str)
+
+    def apply_default_font(self):
+        """Use the note editor font chosen in the preferences."""
+        font = QFont()
+        font.setFamily(str(QSettings().value("note_editor_font", "DejaVu Sans")))
+        font.setPointSize(int(QSettings().value("note_editor_font_size", 10)))
+        self.text_document.setDefaultFont(font)
+
+    def apply_spell_check_settings(self):
+        """Use the spell checking settings chosen in the preferences."""
+        self.spell_check.apply_settings()
+
+    @staticmethod
+    def _main_window():
+        """The main window, if the application has one."""
+        app = QApplication.instance()
+        if app is None:
+            return None
+        for widget in app.topLevelWidgets():
+            if hasattr(widget, "note_view") and hasattr(widget, "show_preferences"):
+                return widget
+        return None
+
+    def show_preferences(self):
+        """Open the program preferences (font family and size live there)."""
+        main_window = self._main_window()
+        if main_window is not None:
+            main_window.show_preferences()
+            preference_dialog = getattr(main_window, "_pref", None)
+            if preference_dialog is not None and not self._pref_connected_:
+                preference_dialog.accepted.connect(self.apply_default_font)
+                self._pref_connected_ = True
+            return
+        # a note window without a main window (e.g. opened from the tray)
+        from .preferences import Preferences
+        dialog = Preferences(self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self.apply_default_font()
 
     # ------------------------------------------------------------------
     def _uuid_key(self) -> str:
@@ -192,6 +237,7 @@ class Note(QMainWindow, Ui_Note):
             self.show_hide_toolbars.setText(self.tr("Show Toolbars"))
 
         menu = self.text_browser.createStandardContextMenu()
+        self.spell_check.populate_menu(menu, point)
         menu.addAction(self.show_hide_toolbars)
         menu.exec(self.text_browser.mapToGlobal(point))
 

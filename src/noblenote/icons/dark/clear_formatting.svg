@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Borrar formato</title>
+  <g fill="none" stroke="#e6e6e6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 41 13.5 15 22 41" stroke-width="5.5"/>
+    <path d="M8.5 32.5H18.5" stroke-width="5.5"/>
+    <circle cx="42" cy="27.5" r="8" stroke-width="5.5"/>
+    <path d="M50 19.5V36" stroke-width="5.5"/>
+  </g>
+  <g fill="#e6e6e6" transform="rotate(-32 32 51)">
+    <rect x="15" y="46" width="17" height="10" rx="2.6"/>
+    <rect x="34" y="46" width="16" height="10" rx="2.6"/>
+  </g>
+</svg>

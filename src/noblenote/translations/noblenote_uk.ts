@@ -22,12 +22,12 @@
   <context>
     <name>FileSystemModel</name>
     <message>
-      <location filename="../filesystemmodel.py" line="65" />
+      <location filename="../filesystemmodel.py" line="66" />
       <source>Files could not be dropped</source>
       <translation>Не вдалося скинути файли</translation>
     </message>
     <message>
-      <location filename="../filesystemmodel.py" line="66" />
+      <location filename="../filesystemmodel.py" line="67" />
       <source>The files could not be dropped because files of the same names are already existing in this notebook:
 
 %1</source>
@@ -36,12 +36,12 @@
 %1</translation>
     </message>
     <message>
-      <location filename="../filesystemmodel.py" line="72" />
+      <location filename="../filesystemmodel.py" line="73" />
       <source>File could not be dropped</source>
       <translation>Не вдалося скинути файл</translation>
     </message>
     <message>
-      <location filename="../filesystemmodel.py" line="73" />
+      <location filename="../filesystemmodel.py" line="74" />
       <source>The file could not be dropped because a file with the same name already exists in this notebook:
 
 %1</source>
@@ -66,13 +66,13 @@
   <context>
     <name>MainWindow</name>
     <message>
-      <location filename="../mainwindow.py" line="911" />
+      <location filename="../mainwindow.py" line="956" />
       <location filename="../mainwindow.py" line="51" />
       <source>&amp;Restore</source>
       <translation>Від&amp;новити</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="87" />
       <location filename="../mainwindow.py" line="52" />
       <source>&amp;Quit</source>
       <translation>Ви&amp;йти</translation>
@@ -83,83 +83,83 @@
       <translation>Введіть ключове слово для пошуку</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="296" />
+      <location filename="../mainwindow.py" line="332" />
       <source>default</source>
       <translation>типовий</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="438" />
+      <location filename="../mainwindow.py" line="482" />
       <source>Note does not exist</source>
       <translation>Нотатки не існує</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="439" />
+      <location filename="../mainwindow.py" line="483" />
       <source>The selected note cannot be opened because it has been moved or renamed!</source>
       <translation>Позначену нотатку не вдалося відкрити, оскільки її було пересунуто або перейменовано!</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="470" />
+      <location filename="../mainwindow.py" line="514" />
       <source>new notebook</source>
       <translation>новий нотатник</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="475" />
+      <location filename="../mainwindow.py" line="519" />
       <source>new notebook (%1)</source>
       <translation>новий нотатник (%1)</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="487" />
+      <location filename="../mainwindow.py" line="531" />
       <source>new note</source>
       <translation>нова нотатка</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="492" />
+      <location filename="../mainwindow.py" line="536" />
       <source>new note (%1)</source>
       <translation>нова нотатка (%1)</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="559" />
-      <location filename="../mainwindow.py" line="527" />
+      <location filename="../mainwindow.py" line="604" />
+      <location filename="../mainwindow.py" line="572" />
       <source>Notebook could not be deleted</source>
       <translation>Не вдалося вилучити нотатник</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="528" />
+      <location filename="../mainwindow.py" line="573" />
       <source>The notebook could not be deleted because one notebook must remain</source>
       <translation>Цей нотатник не можна вилучати, оскільки у програми має залишатися принаймні один нотатник</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="537" />
+      <location filename="../mainwindow.py" line="582" />
       <source>Delete Notebook</source>
       <translation>Вилучити нотатник</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="538" />
+      <location filename="../mainwindow.py" line="583" />
       <source>Are you sure you want to delete the notebook "%1" and move all containing notes to the trash?</source>
       <translation>Ви справді хочете вилучити нотатник «%1» і пересунути весь його вміст до смітника?</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="560" />
+      <location filename="../mainwindow.py" line="605" />
       <source>The notebook could not be deleted because one or more notes inside the notebook could not be deleted.</source>
       <translation>Цей нотатник не можна вилучати, оскільки програмі не вдалося вилучити одну або декілька нотаток, що у ньому містяться.</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="607" />
+      <location filename="../mainwindow.py" line="652" />
       <source>&amp;Open notes</source>
       <translation>Ві&amp;дкрити нотатки</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="615" />
+      <location filename="../mainwindow.py" line="660" />
       <source>Show &amp;Source</source>
       <translation>Показати &amp;код</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="660" />
+      <location filename="../mainwindow.py" line="705" />
       <source>Copy error</source>
       <translation>Помилка копіювання</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="661" />
+      <location filename="../mainwindow.py" line="706" />
       <source>Notes of the same names already exist in this notebook:
 
 %1</source>
@@ -168,32 +168,32 @@
 %1</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="696" />
+      <location filename="../mainwindow.py" line="741" />
       <source>&lt;h1&gt;{0} version {1}&lt;/h1&gt;&lt;p&gt;&lt;b&gt;{0}&lt;/b&gt; is a note taking application&lt;/p&gt;&lt;p&gt;Copyright © 2020 Christian Metscher&lt;/p&gt;&lt;p&gt;This is the PyQt6 port of nobleNote.&lt;/p&gt;&lt;p&gt;THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.&lt;/p&gt;&lt;p&gt;PyQt6&lt;/p&gt;</source>
       <translation type="unfinished" />
     </message>
     <message>
-      <location filename="../mainwindow.py" line="706" />
+      <location filename="../mainwindow.py" line="751" />
       <source>About </source>
       <translation>Про </translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="723" />
+      <location filename="../mainwindow.py" line="768" />
       <source>Deleting notes</source>
       <translation type="unfinished">Вилучаємо нотатки</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="724" />
+      <location filename="../mainwindow.py" line="769" />
       <source>Are you sure you want to permanently delete the selected notes?</source>
       <translation />
     </message>
     <message>
-      <location filename="../mainwindow.py" line="727" />
+      <location filename="../mainwindow.py" line="772" />
       <source>Delete Multiple Notes</source>
       <translation>Вилучення декількох нотаток</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="728" />
+      <location filename="../mainwindow.py" line="773" />
       <source>Are you sure you want to move these %1 notes to the trash?
 
 %2</source>
@@ -202,192 +202,183 @@
 %2</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="732" />
+      <location filename="../mainwindow.py" line="777" />
       <source>Delete Note</source>
       <translation>Вилучення нотатки</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="733" />
+      <location filename="../mainwindow.py" line="778" />
       <source>Are you sure you want to move the note %1 to the trash?</source>
       <translation>Ви справді хочете пересунути нотатку %1 до смітника?</translation>
     </message>
     <message>
-      <location filename="../mainwindow.py" line="878" />
+      <location filename="../mainwindow.py" line="923" />
       <source>&amp;Minimize</source>
       <translation>&amp;Мінімізувати</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="17" />
       <source>nobleNote</source>
       <translation>nobleNote</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="34" />
       <source>&amp;File</source>
       <translation>&amp;Файл</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="36" />
       <source>Open recent</source>
       <translation />
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
-      <source>&amp;Settings</source>
-      <translation>П&amp;араметри</translation>
-    </message>
-    <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
-      <source>&amp;Help</source>
-      <translation>&amp;Довідка</translation>
-    </message>
-    <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
-      <source>&amp;View</source>
-      <translation>П&amp;ерегляд</translation>
-    </message>
-    <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="38" />
       <source>&amp;Edit</source>
       <translation>З&amp;міни</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="40" />
+      <source>&amp;View</source>
+      <translation>П&amp;ерегляд</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_mainwindow.py" line="42" />
+      <source>&amp;Settings</source>
+      <translation>П&amp;араметри</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_mainwindow.py" line="44" />
+      <source>&amp;Help</source>
+      <translation>&amp;Довідка</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_mainwindow.py" line="88" />
       <source>Ctrl+Q</source>
       <translation>Ctrl+Q</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="91" />
       <source>&amp;Import</source>
       <translation>&amp;Імпорт</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="93" />
       <source>&amp;Configure...</source>
       <translation>&amp;Налаштувати…</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
-      <source>Ctrl+P</source>
-      <translation>Ctrl+P</translation>
-    </message>
-    <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
-      <source>&amp;About</source>
-      <translation>Пр&amp;о програму</translation>
-    </message>
-    <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
-      <source>&amp;Show toolbar</source>
-      <translation>&amp;Показати панель</translation>
-    </message>
-    <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
-      <source>Ctrl+Shift+T</source>
-      <translation>Ctrl+Shift+T</translation>
-    </message>
-    <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="96" />
       <source>&amp;Trash</source>
       <translation>С&amp;мітник</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
-      <source>Ctrl+T</source>
-      <translation>Ctrl+T</translation>
+      <location filename="../ui/ui_mainwindow.py" line="97" />
+      <source>Ctrl+Shift+T</source>
+      <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="99" />
+      <source>&amp;About</source>
+      <translation>Пр&amp;о програму</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_mainwindow.py" line="102" />
+      <source>&amp;Show toolbar</source>
+      <translation>&amp;Показати панель</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_mainwindow.py" line="106" />
       <source>&amp;History</source>
       <translation>&amp;Журнал</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="107" />
       <source>Ctrl+Shift+H</source>
       <translation>Ctrl+Shift+H</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="110" />
       <source>&amp;New notebook</source>
       <translation>С&amp;творити нотатник</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="111" />
       <source>Ctrl+N</source>
       <translation>Ctrl+N</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="113" />
       <source>&amp;Rename notebook</source>
       <translation>Пере&amp;йменувати нотатник</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="114" />
       <source>Ctrl+R</source>
       <translation>Ctrl+R</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="116" />
       <source>&amp;Delete notebook</source>
       <translation>Ви&amp;лучити нотатник</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="117" />
       <source>Ctrl+D</source>
       <translation>Ctrl+D</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="119" />
       <source>&amp;New note</source>
       <translation>С&amp;творити нотатку</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="120" />
       <source>Ctrl+Shift+N</source>
       <translation>Ctrl+Shift+N</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="125" />
+      <location filename="../ui/ui_mainwindow.py" line="122" />
       <source>&amp;Rename note</source>
       <translation>Пере&amp;йменувати нотатку</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="124" />
       <source>Ctrl+Shift+R</source>
       <translation>Ctrl+Shift+R</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="127" />
       <source>&amp;Delete note</source>
       <translation>Ви&amp;лучити нотатку</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="129" />
       <source>Ctrl+Shift+D</source>
       <translation>Ctrl+Shift+D</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="131" />
       <source>&amp;Cut</source>
       <translation>Ви&amp;різати</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="132" />
       <source>Ctrl+X</source>
       <translation>Ctrl+X</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="134" />
       <source>&amp;Paste</source>
       <translation>&amp;Вставити</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="136" />
       <source>Ctrl+V</source>
       <translation>Ctrl+V</translation>
     </message>
     <message>
-      <location filename="../ui/mainwindow.ui" line="0" />
+      <location filename="../ui/ui_mainwindow.py" line="138" />
       <source>a</source>
       <translation />
     </message>
@@ -395,17 +386,17 @@
   <context>
     <name>Note</name>
     <message>
-      <location filename="../note.py" line="190" />
+      <location filename="../note.py" line="235" />
       <source>Hide Toolbars</source>
       <translation />
     </message>
     <message>
-      <location filename="../note.py" line="192" />
+      <location filename="../note.py" line="237" />
       <source>Show Toolbars</source>
       <translation />
     </message>
     <message>
-      <location filename="../ui/note.ui" line="0" />
+      <location filename="../ui/ui_note.py" line="15" />
       <source>Note-Editor</source>
       <translation>Редактор нотаток</translation>
     </message>
@@ -436,214 +427,265 @@
   <context>
     <name>NoteImporter</name>
     <message>
-      <location filename="../noteimporter.py" line="36" />
+      <location filename="../noteimporter.py" line="40" />
       <source>Select one or more tomboy or gnote notes</source>
       <translation>Позначте одну або декілька нотаток tomboy або gnote</translation>
     </message>
     <message>
-      <location filename="../noteimporter.py" line="38" />
+      <location filename="../noteimporter.py" line="42" />
       <source>Notes</source>
       <translation>Нотатки</translation>
     </message>
     <message>
-      <location filename="../noteimporter.py" line="56" />
+      <location filename="../noteimporter.py" line="60" />
       <source>Importing notes...</source>
       <translation>Імпортуємо нотатки…</translation>
     </message>
   </context>
   <context>
+    <name>NoteTitleBar</name>
+    <message>
+      <location filename="../titlebar.py" line="125" />
+      <source>Minimize</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../titlebar.py" line="128" />
+      <source>Maximize</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../titlebar.py" line="131" />
+      <source>Close</source>
+      <translation type="unfinished" />
+    </message>
+  </context>
+  <context>
     <name>Preferences</name>
     <message>
-      <location filename="../preferences.py" line="79" />
+      <location filename="../preferences.py" line="41" />
+      <source>Hunspell is not available</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../preferences.py" line="101" />
       <source>Warning</source>
       <translation>Попередження</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="80" />
+      <location filename="../preferences.py" line="102" />
       <source>Could not write settings!</source>
       <translation>Не вдалося записати значення параметрів!</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="84" />
+      <location filename="../preferences.py" line="106" />
       <source>Keep old trash folder?</source>
       <translation>Зберегти стару теку смітника?</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="85" />
+      <location filename="../preferences.py" line="107" />
       <source>Do you want to keep the old trash folder associated with the path %1? (You will be able to see the old files in the trash again if you change back to the previous directory.)</source>
       <translation>Хочете зберегти стару теку смітника, пов’язану з адресою каталогу %1? (Якщо ви повернетеся до старої адреси каталогу, ви зможете переглянути старі файли, що зберігаються у у цьому каталозі-смітнику.)</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="103" />
+      <location filename="../preferences.py" line="125" />
       <source>Couldn't delete trash folder</source>
       <translation>Не вдалося вилучити теку смітника</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="104" />
+      <location filename="../preferences.py" line="126" />
       <source>Could not delete the trash folder!</source>
       <translation>Не вдалося вилучити теку смітника!</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="130" />
+      <location filename="../preferences.py" line="163" />
       <source>Open Directory</source>
       <translation>Відкриття каталогу</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="135" />
+      <location filename="../preferences.py" line="168" />
       <source>No Write Access</source>
       <translation>Немає доступу для запису</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="136" />
+      <location filename="../preferences.py" line="169" />
       <source>The path "%1" is not writable!</source>
       <translation>Запис до каталогу з адресою «%1» заборонено!</translation>
     </message>
     <message>
-      <location filename="../preferences.py" line="147" />
+      <location filename="../preferences.py" line="180" />
       <source>(Will be updated after pressing OK.)</source>
       <translation />
     </message>
     <message>
-      <location filename="../ui/preferences.ui" line="0" />
+      <location filename="../ui/ui_preferences.py" line="17" />
       <source>Preferences</source>
       <translation>Параметри</translation>
     </message>
     <message>
-      <location filename="../ui/preferences.ui" line="0" />
+      <location filename="../ui/ui_preferences.py" line="27" />
+      <source>Root directory:</source>
+      <translation />
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="36" />
+      <source>&amp;Browse ...</source>
+      <translation>Ви&amp;брати…</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="49" />
+      <source>Backup directory:</source>
+      <translation />
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="64" />
+      <source>Number of recently opened notes</source>
+      <translation />
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="73" />
+      <source>&amp;Close to tray</source>
+      <translation>З&amp;гортати до лотка</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="76" />
       <source>&amp;Touch screen scrolling</source>
       <translation type="unfinished">гортання за допомогою сенсорного екрана</translation>
     </message>
     <message>
-      <location filename="../ui/preferences.ui" line="0" />
+      <location filename="../ui/ui_preferences.py" line="90" />
+      <source>Note editor default size:</source>
+      <translation>Типовий розмір шрифту редактора нотаток:</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="95" />
+      <source>Width:</source>
+      <translation>Ширина: </translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="105" />
+      <source>Height:</source>
+      <translation>Висота: </translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="123" />
       <source>Note editor default font:</source>
       <translation>Типовий шрифти редактора нотаток:</translation>
     </message>
     <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Notes can be opened from the tray icon when the application is minimized to the system tray&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation />
+      <location filename="../ui/ui_preferences.py" line="136" />
+      <source>Check spelling while typing</source>
+      <translation type="unfinished" />
     </message>
     <message>
-      <location filename="../ui/preferences.ui" line="0" />
+      <location filename="../ui/ui_preferences.py" line="138" />
+      <source>Underline misspelled words with Hunspell</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="144" />
+      <source>Dictionary:</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="166" />
       <source>&amp;Open notes from tray</source>
       <translation />
     </message>
     <message>
-      <location filename="../ui/preferences.ui" line="0" />
+      <location filename="../ui/ui_preferences.py" line="167" />
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Notes can be opened from the tray icon when the application is minimized to the system tray&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation />
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="176" />
+      <source>&amp;Hide main window at startup</source>
+      <translation />
+    </message>
+    <message>
+      <location filename="../ui/ui_preferences.py" line="177" />
       <source>Do not show the main interface and notes on startup.
 (Minimized to tray icon)</source>
       <translation />
     </message>
     <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>&amp;Hide main window at startup</source>
-      <translation />
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>Width:</source>
-      <translation>Ширина: </translation>
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>&amp;Close to tray</source>
-      <translation>З&amp;гортати до лотка</translation>
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>Height:</source>
-      <translation>Висота: </translation>
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>Root directory:</source>
-      <translation />
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>Backup directory:</source>
-      <translation />
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>Note editor default size:</source>
-      <translation>Типовий розмір шрифту редактора нотаток:</translation>
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>&amp;Browse ...</source>
-      <translation>Ви&amp;брати…</translation>
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
-      <source>Number of recently opened notes</source>
-      <translation />
-    </message>
-    <message>
-      <location filename="../ui/preferences.ui" line="0" />
+      <location filename="../ui/ui_preferences.py" line="185" />
       <source>&amp;Show "Show Source" menu entry</source>
       <translation>&amp;Показувати пункт меню «Показати код»</translation>
     </message>
   </context>
   <context>
+    <name>SpellCheck</name>
+    <message>
+      <location filename="../spellchecker.py" line="297" />
+      <source>Add to dictionary</source>
+      <translation type="unfinished" />
+    </message>
+  </context>
+  <context>
     <name>TextFormattingToolbar</name>
     <message>
-      <location filename="../textformattingtoolbar.py" line="19" />
+      <location filename="../textformattingtoolbar.py" line="21" />
       <source>Format actions</source>
       <translation>Дії з форматування</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="23" />
+      <location filename="../textformattingtoolbar.py" line="32" />
       <source>&amp;Bold</source>
       <translation>&amp;Жирний</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="33" />
+      <location filename="../textformattingtoolbar.py" line="42" />
       <source>&amp;Italic</source>
       <translation>&amp;Курсив</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="43" />
+      <location filename="../textformattingtoolbar.py" line="52" />
       <source>&amp;Underline</source>
       <translation>П&amp;ідкреслений</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="53" />
+      <location filename="../textformattingtoolbar.py" line="62" />
       <source>&amp;Strike Out</source>
       <translation>&amp;Закреслений</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="63" />
+      <location filename="../textformattingtoolbar.py" line="72" />
       <source>&amp;Hyperlink</source>
       <translation>Г&amp;іперпосилання</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="69" />
+      <location filename="../textformattingtoolbar.py" line="78" />
       <source>&amp;Clear formatting</source>
       <translation>З&amp;няти форматування</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="75" />
+      <location filename="../textformattingtoolbar.py" line="84" />
       <source>Bullet point</source>
       <translation />
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="84" />
+      <location filename="../textformattingtoolbar.py" line="93" />
       <source>&amp;Text color...</source>
       <translation>Колір т&amp;ексту…</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="91" />
+      <location filename="../textformattingtoolbar.py" line="100" />
       <source>&amp;Background color...</source>
       <translation>Колір &amp;тла…</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="195" />
+      <location filename="../textformattingtoolbar.py" line="107" />
+      <source>&amp;Preferences</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../textformattingtoolbar.py" line="231" />
       <source>Insert hyperlink</source>
       <translation>Вставити гіперпосилання</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="196" />
+      <location filename="../textformattingtoolbar.py" line="232" />
       <source>Addr&amp;ess:</source>
       <translation>&amp;Адреса:</translation>
     </message>
@@ -679,48 +721,58 @@
   <context>
     <name>Trash</name>
     <message>
-      <location filename="../trash.py" line="71" />
+      <location filename="../trash.py" line="77" />
       <source>Deleting notes</source>
       <translation>Вилучаємо нотатки</translation>
     </message>
     <message>
-      <location filename="../trash.py" line="72" />
+      <location filename="../trash.py" line="78" />
       <source>Are you sure you want to permanently delete the selected notes?</source>
       <translation />
     </message>
     <message>
-      <location filename="../ui/trash.ui" line="0" />
+      <location filename="../ui/ui_trash.py" line="16" />
       <source>Trash</source>
       <translation>Смітник</translation>
     </message>
     <message>
-      <location filename="../ui/trash.ui" line="0" />
+      <location filename="../ui/ui_trash.py" line="28" />
       <source>&amp;Restore</source>
       <translation>&amp;Відновити</translation>
     </message>
     <message>
-      <location filename="../ui/trash.ui" line="0" />
+      <location filename="../ui/ui_trash.py" line="33" />
       <source>&amp;Delete</source>
       <translation>Ви&amp;лучити</translation>
     </message>
     <message>
-      <location filename="../ui/trash.ui" line="0" />
+      <location filename="../ui/ui_trash.py" line="49" />
       <source>Select the notes you want to delete or restore</source>
       <translation>Позначте нотатки, які ви хочете вилучити або відновити</translation>
     </message>
     <message>
-      <location filename="../ui/trash.ui" line="0" />
+      <location filename="../ui/ui_trash.py" line="55" />
       <source>Preview</source>
       <translation>Перегляд</translation>
     </message>
     <message>
-      <location filename="../ui/trash.ui" line="0" />
+      <location filename="../ui/ui_trash.py" line="66" />
       <source>Deleted notes</source>
       <translation>Вилучені нотатки</translation>
     </message>
   </context>
   <context>
     <name>Welcome</name>
+    <message>
+      <location filename="../ui/ui_welcome.py" line="15" />
+      <source>Welcome to nobleNote</source>
+      <translation>Вітаємо у nobleNote</translation>
+    </message>
+    <message>
+      <location filename="../ui/ui_welcome.py" line="35" />
+      <source>&amp;Browse</source>
+      <translation>В&amp;казати</translation>
+    </message>
     <message>
       <location filename="../welcome.py" line="41" />
       <source>Choose a directory</source>
@@ -764,16 +816,6 @@ You can choose a directory where the notes will be saved in.</source>
 The path where the notes are located is not writable.
 You can choose a new directory where the notes will be saved in. Otherwise changes might not be saved.</source>
       <translation />
-    </message>
-    <message>
-      <location filename="../ui/welcome.ui" line="0" />
-      <source>Welcome to nobleNote</source>
-      <translation>Вітаємо у nobleNote</translation>
-    </message>
-    <message>
-      <location filename="../ui/welcome.ui" line="0" />
-      <source>&amp;Browse</source>
-      <translation>В&amp;казати</translation>
     </message>
   </context>
 </TS>
