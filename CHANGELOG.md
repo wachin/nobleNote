@@ -19,6 +19,15 @@ is still kept in [NEWS](NEWS).
   misspelled words, suggestions and "Add to dictionary" in the context menu,
   and dictionary selection and toggle in the preferences. It is optional:
   without the Hunspell bindings or dictionaries the editor works as before.
+- A big reminder over the editor when undoing or redoing, with the shortcut
+  that reverses the action (`Ctrl+Shift+Z` or `Ctrl+Y` to redo). Undo and redo
+  are also buttons in the formatting toolbar and entries in the context menu,
+  with light and dark icons.
+- Persistent per-note undo history: every change is stored with its date and
+  the removed and added text in a SQLite database next to the settings file,
+  so deleted words survive note reloads and restarts. The history window
+  (`Ctrl+Shift+H`) lists every change, can copy or insert deleted text, and
+  can restore the note to a saved point in the past.
 
 ### Changed
 

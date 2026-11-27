@@ -4,12 +4,14 @@ Estado del port de C++/Qt6 a Python/PyQt6.
 
 ## Estado actual: COMPLETO (a nivel de codigo)
 
-- **26/26** archivos `.cpp` tienen equivalente en `src/noblenote/` (34 modulos, todos importan).
+- **26/26** archivos `.cpp` tienen equivalente en `src/noblenote/` (37 modulos, todos importan).
 - **164 metodos** del C++: 149 con el mismo nombre en snake_case, 15 renombrados o codigo muerto (ver abajo).
 - **5/5** formularios `.ui` portados a `src/noblenote/ui/ui_*.py`.
 - **Traducciones funcionando**: 11 idiomas, `.qm` versionados y traductor cargado al arrancar.
 - **Iconos reales** (20 SVG + 11 variantes oscuras + `.ico`), **arrastrar y soltar** con `MoveAction`, **19 claves de `QSettings`** identicas al C++ (mas 3 nuevas de ortografia).
 - **Barra de titulo propia** (sin marco nativo) con la barra de formato dentro, y **correccion ortografica opcional con Hunspell**.
+- **Deshacer/rehacer con aviso grande** al pulsar `Ctrl+Z`/`Ctrl+Shift+Z` (o `Ctrl+Y`), botones en la barra de formato, menu contextual e iconos claro/oscuro.
+- **Historial persistente por nota** en SQLite (`history/undo-history.sqlite3` junto a la configuracion, tambien en modo portable), con ventana de historial (`Ctrl+Shift+H`) para copiar/insertar texto borrado o restaurar la nota a un punto guardado.
 
 Pendiente: validar en una sesion grafica real. El codigo C++ y los `.ui` originales ya
 se borraron de `src/`; siguen disponibles en el tag **`v1.5.0-cpp`**.
@@ -149,7 +151,7 @@ nombre (por ejemplo `_translate`), asi que las cadenas nuevas deben escribirse c
 
 ## Pendiente
 
-- [ ] Validar lo anterior en una sesion grafica real.
+- [ ] Validar lo anterior en una sesion grafica real (incluidos el aviso grande al deshacer y la ventana de historial).
 - [x] Borrar el C++ (`src/*.cpp|h`, `nobleNote.pro`, `nobleNote.qrc`, `icon.rc`) y los 5 `.ui`
       de `src/noblenote/ui/`. Recuperable con `git checkout v1.5.0-cpp -- src/`.
 - [ ] Valorar borrar `xorcipher.py` (sin uso, igual que en el C++).

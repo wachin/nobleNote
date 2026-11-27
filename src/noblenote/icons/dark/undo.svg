@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Deshacer</title>
+  <g fill="none" stroke="#e6e6e6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 14 10 26 22 38"/>
+    <path d="M10 26h28a16 16 0 0 1 0 32H26"/>
+  </g>
+</svg>

@@ -156,6 +156,19 @@ Two details decide whether the entry actually starts the program:
 After copying the files, log out and back in (or restart the shell) so the menu is
 rebuilt.
 
+### Undo, redo and the change history
+
+`Ctrl+Z` undoes and shows a big reminder with the shortcut that redoes the
+change (`Ctrl+Shift+Z`, or `Ctrl+Y`). Every change is also recorded per note in
+`history/undo-history.sqlite3` next to the settings file (also in portable
+mode), so deleted text is not lost when the note is reloaded or nobleNote is
+closed.
+
+`Ctrl+Shift+H`, or "Change history…" in the context menu, opens the history
+window: it lists every change with its date and text, can copy or insert the
+deleted text back into the note, and can restore the note to a saved point in
+the past.
+
 ### Translations
 
 The port ships 11 translations (`src/noblenote/translations/*.qm`) for: Asturian,

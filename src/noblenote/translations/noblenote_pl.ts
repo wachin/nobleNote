@@ -51,6 +51,126 @@
     </message>
   </context>
   <context>
+    <name>HistoryWindow</name>
+    <message>
+      <location filename="../historywindow.py" line="188" />
+      <location filename="../historywindow.py" line="102" />
+      <source>Change history</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="110" />
+      <source>Every change of this note is kept here, also after closing nobleNote. Select a change to read, copy or insert the deleted text, or to restore the note to a saved point.</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="119" />
+      <source>Search in the deleted or written text</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="144" />
+      <source>Copy deleted text</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="146" />
+      <source>Insert in the note</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="148" />
+      <source>Restore the note to this moment</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="149" />
+      <source>Refresh</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="176" />
+      <source>Note opened</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="177" />
+      <source>Note reloaded</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="178" />
+      <source>Text typed</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="179" />
+      <source>Text deleted</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="180" />
+      <source>Text replaced</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="181" />
+      <source>Undo</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="182" />
+      <source>Redo</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="183" />
+      <source>Note restored</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="227" />
+      <source>Action: </source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="228" />
+      <source>Date and time: </source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="232" />
+      <source>Removed text:</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="234" />
+      <source>Added text:</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="236" />
+      <source>This entry has no text of its own.</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="272" />
+      <location filename="../historywindow.py" line="266" />
+      <source>Restore the note</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="267" />
+      <source>There is no saved restoration point before this change. Open the note and make a change first.</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="273" />
+      <source>The note will go back to its state at %1. Later changes are not deleted from the history: you can read them here again. Do you want to continue?</source>
+      <translation type="unfinished" />
+    </message>
+  </context>
+  <context>
     <name>HtmlNoteWriter</name>
     <message>
       <location filename="../htmlnotewriter.py" line="126" />
@@ -386,12 +506,112 @@
   <context>
     <name>Note</name>
     <message>
-      <location filename="../note.py" line="235" />
+      <location filename="../note.py" line="64" />
+      <source>&amp;Undo</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="66" />
+      <source>Undo (Ctrl+Z)</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="68" />
+      <source>&amp;Redo</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="72" />
+      <source>Redo (Ctrl+Shift+Z or Ctrl+Y)</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="74" />
+      <source>Change &amp;history…</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="256" />
+      <location filename="../note.py" line="247" />
+      <location filename="../note.py" line="193" />
+      <location filename="../note.py" line="176" />
+      <source>The note is read-only</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="180" />
+      <source>Nothing to undo</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="211" />
+      <location filename="../note.py" line="181" />
+      <source>Redo with Ctrl+Shift+Z (or Ctrl+Y)</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="197" />
+      <source>Nothing to redo</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="214" />
+      <location filename="../note.py" line="197" />
+      <source>Undo with Ctrl+Z</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="210" />
+      <source>Undone</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="213" />
+      <source>Redone</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="220" />
+      <source>Restored: «%1»</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="222" />
+      <source>Written: «%1»</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="224" />
+      <source>Removed: «%1»</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="230" />
+      <source>The history is not ready</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="263" />
+      <source>Note restored</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="264" />
+      <source>The later changes are still in the history.</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="265" />
+      <source>History: Ctrl+Shift+H</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../note.py" line="406" />
       <source>Hide Toolbars</source>
       <translation />
     </message>
     <message>
-      <location filename="../note.py" line="237" />
+      <location filename="../note.py" line="408" />
       <source>Show Toolbars</source>
       <translation />
     </message>
@@ -404,22 +624,22 @@
   <context>
     <name>NoteDescriptor</name>
     <message>
-      <location filename="../notedescriptor.py" line="95" />
+      <location filename="../notedescriptor.py" line="96" />
       <source>Note modified</source>
       <translation>Notatka zmodyfikowana</translation>
     </message>
     <message>
-      <location filename="../notedescriptor.py" line="96" />
+      <location filename="../notedescriptor.py" line="97" />
       <source>This note has been modified by another instance of %1. Should the note be saved under a different name? Else the note will be reloaded.</source>
       <translation>Ta notatka została zmodyfikowana przez inny proces %1. Zapisać notatkę pod inną nazwą? W przeciwnym razie notatka zostanie załadowana ponownie.</translation>
     </message>
     <message>
-      <location filename="../notedescriptor.py" line="123" />
+      <location filename="../notedescriptor.py" line="124" />
       <source>Note does not exist</source>
       <translation>Notatka nie istnieje</translation>
     </message>
     <message>
-      <location filename="../notedescriptor.py" line="124" />
+      <location filename="../notedescriptor.py" line="125" />
       <source>This note does not longer exist. Do you want to keep the editor open?</source>
       <translation>Ta notatka już nie istnieje. Czy chcesz pozostawić edytor otwarty?</translation>
     </message>
@@ -680,12 +900,12 @@
       <translation type="unfinished" />
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="231" />
+      <location filename="../textformattingtoolbar.py" line="245" />
       <source>Insert hyperlink</source>
       <translation>Wstaw hiperłącze</translation>
     </message>
     <message>
-      <location filename="../textformattingtoolbar.py" line="232" />
+      <location filename="../textformattingtoolbar.py" line="246" />
       <source>Addr&amp;ess:</source>
       <translation>Adr&amp;es:</translation>
     </message>
@@ -816,6 +1036,34 @@ Możesz wybrać katalog, w którym twoje notatki będą zapisywane.</translation
 The path where the notes are located is not writable.
 You can choose a new directory where the notes will be saved in. Otherwise changes might not be saved.</source>
       <translation />
+    </message>
+  </context>
+  <context>
+    <name>_HistoryModel</name>
+    <message>
+      <location filename="../historywindow.py" line="64" />
+      <source>Date and time</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="65" />
+      <source>Action</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="66" />
+      <source>Text</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="85" />
+      <source>Removed text:</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../historywindow.py" line="87" />
+      <source>Added text:</source>
+      <translation type="unfinished" />
     </message>
   </context>
 </TS>

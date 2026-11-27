@@ -17,6 +17,7 @@ from .xmlnotereader import XmlNoteReader
 
 
 class NoteDescriptor(QObject):
+    aboutToLoad = pyqtSignal()            # the document is about to be replaced
     loadFinished = pyqtSignal(object)     # HtmlNoteReader, emitted after async load
     close = pyqtSignal()
 
@@ -185,6 +186,7 @@ class NoteDescriptor(QObject):
         # check if the file is a tomboy note
         if XmlNoteReader.might_be_xml_note(self.file_path_):
             reader = XmlNoteReader(self.file_path_, self.document_)
+            self.aboutToLoad.emit()
             reader.read()  # can only be run in the gui thread
             self.on_load_finished(reader, True)
         else:
@@ -201,6 +203,7 @@ class NoteDescriptor(QObject):
 
     def on_html_load_finished(self, reader):
         # the text document must be manipulated on the gui thread
+        self.aboutToLoad.emit()
         self.document_.setHtml(reader.html())
         self.on_load_finished(reader)
 

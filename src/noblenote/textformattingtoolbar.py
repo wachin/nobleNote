@@ -116,6 +116,20 @@ class TextFormattingToolbar(QToolBar):
             watcher.paletteChanged.connect(self.refresh_icons)
 
     # ------------------------------------------------------------------
+    def add_history_actions(self, undo_action: QAction,
+                            redo_action: QAction):
+        """Put the undo and redo buttons before the formatting actions."""
+        actions = self.actions()
+        first = actions[0] if actions else None
+        if first is not None:
+            self.insertAction(first, redo_action)
+            self.insertAction(redo_action, undo_action)
+            self.insertSeparator(first)
+        else:
+            self.addAction(undo_action)
+            self.addAction(redo_action)
+            self.addSeparator()
+
     @staticmethod
     def _swatch(color) -> QIcon:
         """A button icon filled with the given color."""
